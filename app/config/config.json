@@ -1,7 +1,7 @@
 {
     "companyName": "Cornelius",
     "schema": "http://",
-    "host": "localhost:3000",
+    "host": "127.0.0.1:8000",
     "links": {
         "vk": "https://vk.com/cornelius_leather",
         "facebook": "",

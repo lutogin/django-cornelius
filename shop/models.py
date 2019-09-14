@@ -7,12 +7,20 @@ import uuid
 import os
 
 
-def recipe_image_file_path(instance, filename):
+def product_image_file_path(instance, filename):
     """Генерирует имя фото и возвращает путь с именем"""
     ext = filename.split('.')[-1]
     filename = f'{uuid.uuid4()}.{ext}'
 
     return os.path.join('static/img/products', filename)
+
+
+def slider_image_file_path(instance, filename):
+    """Генерирует имя фото и возвращает путь с именем для слайдера"""
+    ext = filename.split('.')[-1]
+    filename = f'{uuid.uuid4()}.{ext}'
+
+    return os.path.join('static/img/slider', filename)
 
 
 class Category(models.Model):
@@ -34,7 +42,7 @@ class Category(models.Model):
 
 class Photo(models.Model):
     """Модель для фото продукта"""
-    image = models.ImageField(null=True, upload_to=recipe_image_file_path, verbose_name='Фото товара')
+    image = models.ImageField(null=True, upload_to=product_image_file_path, verbose_name='Фото товара')
 
     def save(self):
         super().save()  # saving image first
@@ -77,3 +85,17 @@ class Product(models.Model):
 
     def __str__(self):
         return self.title
+
+
+class Review(models.Model):
+    """Модель отзывов"""
+    fio = models.CharField(max_length=255)
+    position = models.CharField(max_length=255, blank=True)
+    review_text = models.TextField()
+
+
+class MainSlider(models.Model):
+    """Модель слайдера"""
+    title = models.CharField(max_length=255)
+    description = models.CharField(max_length=255)
+    image = models.ImageField(null=True, upload_to=slider_image_file_path, verbose_name='Слайд')

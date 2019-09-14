@@ -1,30 +1,30 @@
 <div class="content-lg container">
-        <div class="row">
-            <div class="col-sm-9">
-                <h2>Отзывы о нашей работе</h2>
+  <div class="row">
+    <div class="col-sm-9">
+      <h2>Отзывы о нашей работе</h2>
 
-                <!-- Swiper Testimonials -->
-                <div class="swiper-slider swiper-testimonials">
-                    <!-- Swiper Wrapper -->
-                    <div class="swiper-wrapper">
-                        {% for review in reviews %}
-                            <div class="swiper-slide">
-                                <blockquote class="blockquote">
-                                    <div class="margin-b-20">
-                                        {{ review.text }}
-                                    </div>
-                                    <p><span class="fweight-700 color-link">{{ review.fio }}</span>, {{ review.position }}</p>
-                                </blockquote>
-                            </div>
-                        {% endfor %}
-                    </div>
-                    <!-- End Swiper Wrapper -->
-
-                    <!-- Pagination -->
-                    <div class="swiper-testimonials-pagination"></div>
+      <!-- Swiper Testimonials -->
+      <div class="swiper-slider swiper-testimonials">
+        <!-- Swiper Wrapper -->
+        <div class="swiper-wrapper">
+          {% for review in reviews %}
+            <div class="swiper-slide">
+              <blockquote class="blockquote">
+                <div class="margin-b-20">
+                  {{ review.text }}
                 </div>
-                <!-- End Swiper Testimonials -->
+                <p><span class="fweight-700 color-link">{{ review.fio }}</span>, {{ review.position }}</p>
+              </blockquote>
             </div>
+          {% endfor %}
         </div>
-        <!--// end row -->
+        <!-- End Swiper Wrapper -->
+
+        <!-- Pagination -->
+        <div class="swiper-testimonials-pagination"></div>
+      </div>
+      <!-- End Swiper Testimonials -->
     </div>
+  </div>
+  <!--// end row -->
+</div>
