@@ -1,0 +1,29 @@
+<div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
+    <div class="container">
+        <!-- Indicators -->
+        <ol class="carousel-indicators">
+            {% set num = slider|length %}
+            {% for count in 0..num-1 %}
+                <li data-target="#carousel-example-generic" data-slide-to="{{ count }}" {% if count == 0 %}class="active"{% endif %}></li>
+            {% endfor %}
+        </ol>
+    </div>
+
+    <!-- Wrapper for slides -->
+    <div class="carousel-inner" role="listbox">
+        {% for slide in slider %}
+            <div class="item">
+                <img class="img-responsive" src="{{ slide.src }}" alt="Slider Image">
+                <div class="container">
+                    <div class="carousel-centered">
+                        <div class="margin-b-40">
+                            <h1 class="carousel-title">{{ slide.title }}</h1>
+                            <p>{{ slide.description }}</p>
+                        </div>
+                        <a href="#" class="btn-theme btn-theme-sm btn-white-brd text-uppercase">Подобробнее</a>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+</div>

@@ -1,0 +1,35 @@
+{% extends '../base.twig' %}
+
+{% block title_content %}
+    {{ title }}
+{% endblock %}
+
+{% block body %}
+    {% include '../modules/header.twig' %}
+
+    {% include '../modules/slider.twig' %}
+
+    {% include '../modules/topsale-products.twig' %}
+
+    {% include '../modules/works.twig' %}
+
+    {% include '../modules/services.twig' %}
+
+    {% include '../modules/our-clints.twig' %}
+
+    {% include '../modules/testimonials.twig' %}
+
+    <!-- Pricing -->
+    {#{% include '../modules/pricing.twig' %}#}
+    <!-- End Pricing -->
+
+    {#<!-- Promo Section -->#}
+    {#{% include '../modules/promo-section.twig' %}#}
+    {#<!-- End Promo Section -->#}
+
+    <!--========== END PAGE LAYOUT ==========-->
+
+    <!--========== FOOTER ==========-->
+    {% include '../modules/footer.twig' %}
+    <!--========== END FOOTER ==========-->
+{% endblock %}

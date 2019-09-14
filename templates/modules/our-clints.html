@@ -1,0 +1,15 @@
+<div class="bg-color-sky-light">
+  <div class="content-lg container">
+    <div class="swiper-slider swiper-clients">
+      <div class="swiper-wrapper">
+        {% for client in clients %}
+          <div class="swiper-slide">
+            <a href="{{ client.link }}">
+              <img class="swiper-clients-img" src="{{ client.img }}" alt="{{ client.name }}">
+            </a>
+          </div>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+</div>

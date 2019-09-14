@@ -1,0 +1,47 @@
+{% extends '../base.twig' %}
+
+{% block body %}
+    <!--========== HEADER ==========-->
+    {% include '../modules/header.twig' %}
+    <!--========== END HEADER ==========-->
+
+    <!--========== PARALLAX ==========-->
+    <div class="uk-height-large uk-background-cover uk-light uk-flex" uk-parallax="bgy: -300" style="background-image: url('/img/1920x1080/01.jpg');">
+        <h1 class="uk-width-1-2@m uk-text-center uk-margin-auto uk-margin-auto-vertical">{{ title }}</h1>
+    </div>
+    <!--========== PARALLAX ==========-->
+
+    <!--========== PAGE LAYOUT ==========-->
+    <div class="content-lg container">
+        <div class="row margin-b-40">
+            <div class="col-sm-6">
+                <h2>{{ productTypeName[0].types_titles }}</h2>
+                {#<p>{{ product_type.text }}</p>#}
+            </div>
+        </div>
+
+        <div class="row margin-b-50">
+            {% for product in products %}
+                <div class="col-sm-4 sm-margin-b-50">
+                    <a href="/product/?id={{ product.id }}">
+                        <div class="margin-b-20 ">
+                            <div class="wow zoomIn uk-inline-clip uk-transition-toggle" data-wow-duration=".3" data-wow-delay=".1s">
+                                <img class="img-responsive" src="{{ product.img[0].src }}" alt="Product Image">
+                                <img class="uk-transition-scale-up uk-position-cover" src="{{ product.img[1].src }}" alt="Product Image">
+                            </div>
+                        </div>
+                    </a>
+                    <h3>{{ product.type_title }}</h3>
+                    <p>{{ product.description }}</p>
+{#                    <a class="link" href="/product/?id={{ product.id }}">Подробнее</a>#}
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+    <!--========== END PAGE LAYOUT ==========-->
+
+    <!--========== FOOTER ==========-->
+    {% include '../modules/footer.twig' %}
+    <!--========== END FOOTER ==========-->
+
+{% endblock %}

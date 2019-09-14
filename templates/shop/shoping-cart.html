@@ -1,0 +1,103 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block additional_css %}
+  <link href="{% static '/lib/admin/fontawesome-free/css/all.min.css' %}" rel="stylesheet" type="text/css">
+{% endblock %}
+
+{% block title_content %}
+  {{ title }}
+{% endblock %}
+
+{% block body %}
+  {% include 'modules/header.html' %}
+
+  <!--========== PARALLAX ==========-->
+  {% if purcaseProducts and purcaseProducts|length > 0 %}
+    <div class="uk-height-large uk-background-cover uk-light uk-flex" uk-parallax="bgy: -300" style="background-image: url('/static/img/1920x1080/01.jpg');">
+      <h1 class="uk-width-1-2@m uk-text-center uk-margin-auto uk-margin-auto-vertical">{{ title }}</h1>
+    </div>
+  {% else %}
+{#    <div class="uk-height-large uk-background-cover uk-light uk-flex" uk-parallax="bgy: -100" style="background-image: url('/img/cart/_empty2.jpg');">#}
+{#      <h1 class="uk-width-1-2@m uk-text-center uk-margin-auto uk-margin-auto-vertical">{{ title }}</h1>#}
+{#    </div>#}
+    <img src="/img/cart/_empty2.jpg">
+  {% endif %}
+  <!--========== END PARALLAX ==========-->
+
+  <!--========== CART ==========-->
+  {% if purcaseProducts and purcaseProducts|length > 0 %}
+    <script src="{% static '/js/pages/shoping-cart/index.js' %}" defer></script>
+    <div class="content-lg container">
+      <div class="row margin-b-40">
+        <div class="col-sm-12">
+          <div class="col-sm-2"></div>
+          <div class="col-sm-8">
+            <div class="row margin-b-50">
+              <div id="cart">
+                <table class="uk-table uk-table-striped uk-table-hover uk-table-middle">
+                  <caption></caption>
+                  {% for product in purcaseProducts %}
+                    <tr id="product_{{ product.id }}">
+                      <td><i class="far fa-minus-square" size="24px" onclick="removeFromCartBtn('{{ settings.schema ~ settings.host ~ '/remove-from-cart?id=' ~ product.id }}', {{ product.id }}); return !1;"></i></td>
+                      <td class="uk-table-link" width="100px">
+                        <a href="/product?id={{ product.id }}">
+                          <img width="80px" src="{{ product.img[0].src }}" alt="Photo">
+                        </a>
+                      </td>
+                      <td>{{ product.title }}</td>
+                      <td><span class="price">{{ product.price }}</span><span>₽</span></td>
+                    </tr>
+                  {% endfor %}
+                    <tfooter>
+                      <tr>
+  {#                      <td></td>#}
+  {#                      <td></td>#}
+                        <td colspan="3">Предаварительная сумма заказа</td>
+                        <td><span class="totalPrice"></span><span>₽</span></td>
+                      </tr>
+                    </tfooter>
+                </table>
+                <div class="uk-flex uk-flex-around">
+                  <button class="uk-button uk-button-primary request" onclick="" uk-toggle="target: #modal-request-buy">Оставить заявку</button>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-sm-2"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- This is the modal -->
+    <div id="modal-request-buy" uk-modal>
+      <div class="uk-modal-dialog uk-modal-body">
+        <h2 class="uk-modal-title">Оставьте контактные данные для связи</h2>
+        <form action="" class="request-from">
+          <label for="contactName">Как к вам можно обращаться</label>
+          <input type="text" name="contactName" id="contactName" class="uk-input" required>
+          <label for="contactType">Выберите удобный способ связи</label>
+          <select name="contactType" id="contactType" class="uk-select">
+            {% for type in settings.contactTypeList|keys %}
+              <option name="contactType" value="{{ type }}">{{ settings.contactTypeList[type] }}</option>
+            {% endfor %}
+          </select>
+          <label for="contactData">Контактные данные</label>
+          <input type="text" class="uk-input" name="contactData" id="contactData" required>
+
+          <p class="uk-text-right uk-margin-top">
+            <button class="uk-button uk-button-default uk-modal-close" type="button">Отмена</button>
+            <button id="request-btn-submit" class="uk-button uk-button-primary" type="submit">Отправить</button>
+          </p>
+        </form>
+      </div>
+    </div>
+    <!-- Modal END -->
+  {% endif %}
+  <!--========== END CART ==========-->
+
+  <!--========== FOOTER ==========-->
+  {% include 'modules/footer.html' %}
+  <!--========== END FOOTER ==========-->
+{% endblock %}

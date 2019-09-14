@@ -1,0 +1,45 @@
+{
+    "companyName": "Cornelius",
+    "schema": "http://",
+    "host": "localhost:3000",
+    "links": {
+        "vk": "https://vk.com/cornelius_leather",
+        "facebook": "",
+        "instagram": "",
+        "youtube": ""
+    },
+    "contacts": {
+        "tel1": "+380713450846",
+        "tel2": "+380954090765",
+        "viber": "380954090765",
+        "email": "handmadecornelius@gmail.com"
+    },
+    "productType": {
+        "purse": 1,
+        "wallet": 2,
+        "bag": 3,
+        "cover": 4,
+        "housekeeper": 5,
+        "belt": 6,
+        "accessories": 7
+    },
+    "ymapUrl": "https://api-maps.yandex.ru/services/constructor/1.0/js/?um=constructor%3A08f1710e70512b601ee6d8b516123beaefbbb43083c4cd2413c5315f7b27153e&amp;width=450&amp;height=250&amp;lang=ru_UA&amp;scroll=true",
+    "contactTypeList": {
+        "tel": "Телефон",
+        "viber": "Viber",
+        "telegram": "Telegram",
+        "skype": "Skype",
+        "hangouts": "Hangouts",
+        "VK": "VK(ссылка на профиль)",
+        "email": "E-mail"
+    },
+
+    "mailingConfig": {
+        "service": "Gmail",
+        "auth": {
+            "user": "handmadecornelius@gmail.com",
+            "pass": "9492496329"
+        }
+    },
+    "mainMail": "handmadecornelius@gmail.com"
+}

@@ -1,0 +1,40 @@
+<div class="content-lg container">
+    <div class="row margin-b-40">
+        <div class="col-sm-6">
+            <h2>Топы продаж</h2>
+            {#<p>Top sale list</p>#}
+        </div>
+    </div>
+    <!--// end row -->
+
+    <div class="row">
+        <!-- Topsale Products -->
+        {% for product in topSaleProducts %}
+            <div class="col-sm-4 sm-margin-b-50">
+                <a class="link" href="/product/?id={{ product.id }}">
+{#                    <div class="uk-text-center">#}
+{#                        <div class="uk-inline-clip uk-transition-toggle" tabindex="0">#}
+{#                            <img src="images/dark.jpg" alt="">#}
+{#                            <img class="uk-transition-scale-up uk-position-cover" src="images/light.jpg" alt="">#}
+{#                        </div>#}
+{#                        <p class="uk-margin-small-top">2 Images</p>#}
+{#                    </div>#}
+
+                    <div class="margin-b-20 uk-text-center">
+                        <div class="wow zoomIn uk-inline-clip uk-transition-toggle" data-wow-duration=".3" data-wow-delay=".1s">
+                            <img class="img-responsive" src="{{ product.img[0].src }}" alt="Topsale Products Image">
+                            <img class="uk-transition-scale-up uk-position-cover" src="{{ product.img[1].src }}" alt="Topsale Products Image">
+                        </div>
+                    </div>
+                </a>
+                {#<h4><a href="#">{{ product.type_title }}</a>#}
+                    <span class="text-uppercase margin-l-20">{{ product.title }}</span>
+                {#</h4>#}
+                <p>{{ product.text }}</p>
+                {#<a class="link" href="/product/{{ product.id }}">Детальнее</a>#}
+            </div>
+        {% endfor %}
+        <!-- End Topsale Products -->
+    </div>
+    <!--// end row -->
+</div>
