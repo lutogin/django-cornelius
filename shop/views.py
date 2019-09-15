@@ -1,20 +1,10 @@
 from django.shortcuts import render, get_object_or_404
-
+from core.get_config import get_config
 from shop.models import *
-
-import json
-
-from os import path
-
-BASE_DIR = path.dirname(path.dirname(path.abspath(__file__)))
-CONFIG_PATH = path.join(BASE_DIR, 'app', 'config', 'config.json')
 
 
 def index(req):
     """Индексная страница"""
-    with open(CONFIG_PATH, 'r') as conf:
-        configs = json.load(conf)
-
     slider = MainSlider.objects.all()
     reviews = Review.objects.all()
     clients = OurClients.objects.all()
@@ -25,7 +15,7 @@ def index(req):
 
     return render(req, 'shop/index.html', context={
         'title': 'Элитные изделия из кожи ручной работы',
-        'configs': configs,
+        'configs': get_config(),
         'slider': slider,
         'slider_range': slider_range,
         'reviews': reviews,
@@ -34,3 +24,26 @@ def index(req):
         'top_sale': top_sale,
     })
 
+
+def category_products(req, category_slug: str):
+    """Контроллер выбор товаров по категории"""
+    category = Category.objects.get(slug=category_slug)
+    products = Product.objects.filter(slug=category_slug)
+
+    return render(req, 'shop/products.html', context={
+        'title': f'Cornelius|{category.names}',
+        'configs': get_config(),
+        'products': products,
+        'category': category,
+    })
+
+
+def product_detail(req, p_id: int):
+    """Контроллер страници товара"""
+    product = get_object_or_404(Product, id=p_id)
+
+    return render(req, 'shop/product.html', context={
+        'title': f'Cornelius|{product.title}',
+        'configs': get_config(),
+        'product': product
+    })

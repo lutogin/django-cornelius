@@ -145,6 +145,7 @@ MEDIA_ROOT = 'media'
 
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'static'),
+    os.path.join(BASE_DIR, 'media', 'static'),
 ]
 
 AUTH_USER_MODEL = 'core.User'

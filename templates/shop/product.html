@@ -1,20 +1,21 @@
-{% extends '../base.twig' %}
+{% extends 'base.html' %}
+{% load static %}
 
 {% block title_content %}
-    {{ product[0].type }}
+    {{ title }}
 {% endblock %}
 
 {% block additional_js %}
-    <script type="text/javascript" src="/js/components/addToCardBtn.js"></script>
+    <script type="text/javascript" src="{% static '/js/components/addToCardBtn.js' %}"></script>
 {% endblock %}
 
 {% block body %}
     <!--========== HEADER ==========-->
-    {% include '../modules/header.twig' %}
+    {% include 'modules/header.html' %}
     <!--========== END HEADER ==========-->
 
     <!--========== PARALLAX ==========-->
-    <div class="uk-height-large uk-background-cover uk-light uk-flex" uk-parallax="bgy: -300" style="background-image: url('/img/1920x1080/01.jpg');">
+    <div class="uk-height-large uk-background-cover uk-light uk-flex" uk-parallax="bgy: -300" style='background-image: url({% static "/img/1920x1080/01.jpg" %});'>
         <h1 class="uk-width-1-2@m uk-text-center uk-margin-auto uk-margin-auto-vertical">{{ title }}</h1>
     </div>
     <!--========== PARALLAX ==========-->
@@ -23,20 +24,20 @@
     <div class="content-lg container">
         <div class="row margin-b-40">
             <div class="col-sm-6">
-                <h2>{{ product[0].title }} - {{ product[0].price }}р.</h2>
-                <p>{{ product[0].description }}</p>
+                <h2>{{ product.title }} - {{ product.price }}р.</h2>
+                <p>{{ product.description }}</p>
             </div>
             <div class="col-sm-6">
-                <button  class="uk-button uk-button-primary uk-button-large pull-right" onclick="addToCardBtn('{{ settings.schema ~ settings.host ~ '/add-to-card?id=' ~ product[0].id }}'); return !1;">Добавить в корзину</button>
+                <button  class="uk-button uk-button-primary uk-button-large pull-right" onclick="addToCardBtn(); return !1;">Добавить в корзину</button>
             </div>
         </div>
 
         <div uk-lightbox class="row margin-b-50">
-            {% for img in product[0].img %}
+            {% for img in product.imgs.all %}
                 <div class="col-sm-4 sm-margin-b-50">
                     <div class="margin-b-20">
                         <div class="wow zoomIn" data-wow-duration=".3" data-wow-delay=".1s">
-                            <a class="uk-button" href="{{img.src}}"><img class="img-responsive uk-card-hover" src="{{img.src}}" alt="Our Exceptional Solutions Image"></a>
+                            <a class="uk-button" href="{{ img }}"><img class="img-responsive uk-card-hover" src="{{ img }}" alt="Img"></a>
                         </div>
                     </div>
                 </div>
@@ -47,6 +48,6 @@
     <!--========== END Контент продукта ==========-->
 
     <!--========== FOOTER ==========-->
-    {% include '../modules/footer.twig' %}
+    {% include 'modules/footer.html' %}
     <!--========== END FOOTER ==========-->
 {% endblock %}

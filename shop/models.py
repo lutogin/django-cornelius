@@ -42,6 +42,7 @@ def works_image_file_path(instance, filename):
 class Category(models.Model):
     """Модель типа товара."""
     name = models.CharField(max_length=255, verbose_name='Категория товара')
+    names = models.CharField(max_length=255, verbose_name='Категория товара в множ.', default='Test')
     slug = models.SlugField(max_length=200, db_index=True, unique=True)
 
     class Meta:
