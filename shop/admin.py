@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from shop.models import Photo, Product, Category
+from shop.models import *
 
 
 @admin.register(Product)
@@ -14,4 +14,12 @@ class PhotoAdmin(admin.ModelAdmin):
     list_display = ('admin_image',)
 
 
-admin.site.register(Category)
+@admin.register(Category)
+class CategoryAdmin(admin.ModelAdmin):
+    list_display = ['name', 'slug']
+
+
+admin.site.register(MainSlider)
+admin.site.register(Review)
+admin.site.register(OurClients)
+admin.site.register(OurWorks)

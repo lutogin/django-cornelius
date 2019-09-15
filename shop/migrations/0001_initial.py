@@ -30,7 +30,7 @@ class Migration(migrations.Migration):
             name='Photo',
             fields=[
                 ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('image', models.ImageField(null=True, upload_to=shop.models.recipe_image_file_path, verbose_name='Фото товара')),
+                ('image', models.ImageField(null=True, upload_to=shop.models.product_image_file_path, verbose_name='Фото товара')),
             ],
         ),
         migrations.CreateModel(

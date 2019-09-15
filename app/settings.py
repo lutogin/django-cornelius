@@ -106,18 +106,18 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-CACHES = {
-   'default': {
-      'BACKEND': 'django.core.cache.backends.filebased.FileBasedCache',
-      'LOCATION': os.path.join(BASE_DIR, 'django_cache'),
-   }
-}
-
-MIDDLEWARE += [
-   'django.middleware.cache.UpdateCacheMiddleware',
-   'django.middleware.common.CommonMiddleware',
-   'django.middleware.cache.FetchFromCacheMiddleware',
-]
+# CACHES = {
+#    'default': {
+#       'BACKEND': 'django.core.cache.backends.filebased.FileBasedCache',
+#       'LOCATION': os.path.join(BASE_DIR, 'django_cache'),
+#    }
+# }
+#
+# MIDDLEWARE += [
+#    'django.middleware.cache.UpdateCacheMiddleware',
+#    'django.middleware.common.CommonMiddleware',
+#    'django.middleware.cache.FetchFromCacheMiddleware',
+# ]
 
 # Internationalization
 # https://docs.djangoproject.com/en/2.2/topics/i18n/
@@ -140,8 +140,12 @@ STATIC_URL = '/static/'
 # все что в адресе site.loc/static будет иметь путь к STATIC_ROOT(/vol/web/static)
 MEDIA_URL = '/media/'
 # все что в адресе site.loc/media будет иметь путь к MEDIA_ROOT(/vol/web/media)
-STATIC_ROOT = 'static'
+# STATIC_ROOT = 'static'
 MEDIA_ROOT = 'media'
+
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, 'static'),
+]
 
 AUTH_USER_MODEL = 'core.User'
 

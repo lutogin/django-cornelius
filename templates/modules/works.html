@@ -10,17 +10,17 @@
         <div class="masonry-grid">
             <div class="masonry-grid-sizer col-xs-6 col-sm-6 col-md-1"></div>
             {% for work in works %}
-                <div class="masonry-grid-item col-xs-12 col-sm-6 {% if work.large_img == 1 %}col-md-8{% else %}col-md-4{% endif %}">
+                <div class="masonry-grid-item col-xs-12 col-sm-6 {% if work.large_img %}col-md-8{% else %}col-md-4{% endif %}">
                     <!-- Work -->
                     <div class="work wow fadeInUp" data-wow-duration=".3" data-wow-delay=".1s">
                         <div class="work-overlay">
-                            <img class="full-width img-responsive" src="{{ work.src }}" alt="Portfolio Image">
+                            <img class="full-width img-responsive" src="{{ work.img }}" alt="Portfolio Image">
                         </div>
                         <div class="work-content">
                             <h3 class="color-white margin-b-5">{{ work.title }}</h3>
                             <p class="color-white margin-b-0">{{ work.description }}</p>
                         </div>
-                        <a class="content-wrapper-link" href="/products?category={{ work.category_id }}"></a>
+                        <a class="content-wrapper-link" href="/products?category={{ work.product }}"></a>
                     </div>
                     <!-- End Work -->
                 </div>

@@ -2,9 +2,8 @@
     <div class="container">
         <!-- Indicators -->
         <ol class="carousel-indicators">
-            {% set num = slider|length %}
-            {% for count in 0..num-1 %}
-                <li data-target="#carousel-example-generic" data-slide-to="{{ count }}" {% if count == 0 %}class="active"{% endif %}></li>
+            {% for slide_n in slider_range %}
+                <li data-target="#carousel-example-generic" data-slide-to="{{ slide_n }}" {% if slide_n == 0 %}class="active"{% endif %}></li>
             {% endfor %}
         </ol>
     </div>
@@ -13,7 +12,7 @@
     <div class="carousel-inner" role="listbox">
         {% for slide in slider %}
             <div class="item">
-                <img class="img-responsive" src="{{ slide.src }}" alt="Slider Image">
+                <img class="img-responsive" src="{{ slide.img }}" alt="Slider Image">
                 <div class="container">
                     <div class="carousel-centered">
                         <div class="margin-b-40">
