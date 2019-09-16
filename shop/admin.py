@@ -1,5 +1,4 @@
 from django.contrib import admin
-
 from shop.models import *
 
 
@@ -11,7 +10,7 @@ class ProductAdmin(admin.ModelAdmin):
 
 @admin.register(Photo)
 class PhotoAdmin(admin.ModelAdmin):
-    list_display = ('admin_image',)
+    readonly_fields = ('admin_image',)
 
 
 @admin.register(Category)

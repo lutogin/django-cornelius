@@ -12,7 +12,7 @@ def product_image_file_path(instance, filename):
     ext = filename.split('.')[-1]
     filename = f'{uuid.uuid4()}.{ext}'
 
-    return os.path.join('static/img/products/', filename)
+    return os.path.join('/img/products/', filename)
 
 
 def slider_image_file_path(instance, filename):
@@ -20,7 +20,7 @@ def slider_image_file_path(instance, filename):
     ext = filename.split('.')[-1]
     filename = f'{uuid.uuid4()}.{ext}'
 
-    return os.path.join('static/img/slider/', filename)
+    return os.path.join('/img/slider/', filename)
 
 
 def our_clients_image_file_path(instance, filename):
@@ -28,7 +28,7 @@ def our_clients_image_file_path(instance, filename):
     ext = filename.split('.')[-1]
     filename = f'{uuid.uuid4()}.{ext}'
 
-    return os.path.join('static/img/clients/', filename)
+    return os.path.join('/img/clients/', filename)
 
 
 def works_image_file_path(instance, filename):
@@ -36,7 +36,7 @@ def works_image_file_path(instance, filename):
     ext = filename.split('.')[-1]
     filename = f'{uuid.uuid4()}.{ext}'
 
-    return os.path.join('static/img/works/', filename)
+    return os.path.join('/img/works/', filename)
 
 
 class Category(models.Model):
@@ -74,7 +74,8 @@ class Photo(models.Model):
     # Вывод картинок в админке!
     def admin_image(self):
         if self.image:
-            return u'<img src="{0}" width="100"/>'.format(self.image.url)
+            from django.utils.html import mark_safe
+            return mark_safe('<img src="{url}" width="100" height="100" />'.format(url=self.image.url))
         else:
             return '(Нет изображения)'
     admin_image.short_description = 'Фото торвара'

@@ -37,7 +37,6 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'sorl.thumbnail',
     'core',
     'shop',
     'cart'
@@ -146,6 +145,7 @@ MEDIA_ROOT = 'media'
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'static'),
     os.path.join(BASE_DIR, 'media', 'static'),
+    # '/var/www/static/',
 ]
 
 AUTH_USER_MODEL = 'core.User'
