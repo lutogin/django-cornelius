@@ -1,6 +1,7 @@
 from django.shortcuts import render, get_object_or_404
 from core.get_config import get_config
 from shop.models import *
+from cart.forms import *
 
 
 def index(req):
@@ -40,10 +41,13 @@ def category_products(req, category_slug: str):
 
 def product_detail(req, p_id: int):
     """Контроллер страници товара"""
-    product = get_object_or_404(Product, id=p_id)
+    product = get_object_or_404(Product, id=p_id, available=True)
+
+    cart_product_form = CartAddProductForm()
 
     return render(req, 'shop/product.html', context={
         'title': f'Cornelius|{product.title}',
         'configs': get_config(),
-        'product': product
+        'product': product,
+        'cart_product_form': cart_product_form
     })
