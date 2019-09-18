@@ -25,7 +25,10 @@ SECRET_KEY = 'cin2c^lk79t6p$msc^f(lp1o2lp@9n4u!5odr(_h2hor*dqnrc'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [
+    '127.0.0.1',
+    '127.0.0.1:8000',
+]
 
 
 # Application definition
@@ -59,6 +62,8 @@ TEMPLATES = [
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
         'DIRS': [
             os.path.join(BASE_DIR, 'templates'),
+            os.path.join(BASE_DIR, 'shop', 'templates'),
+            os.path.join(BASE_DIR, 'cart', 'templates'),
         ],
         'APP_DIRS': True,
         'OPTIONS': {

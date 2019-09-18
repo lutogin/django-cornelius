@@ -56,8 +56,10 @@
 </head>
 
 <body>
+  {% include 'modules/header.html' %}
   {% block body %}
   {% endblock %}
+  {% include 'modules/footer.html' %}
 </body>
 
 {% block footer %}

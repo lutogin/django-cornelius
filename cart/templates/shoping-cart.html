@@ -7,7 +7,7 @@
 {% endblock %}
 
 {% block title_content %}
-  Ваша корзина товаров
+  {{ title }}
 {% endblock %}
 
 {% block body %}
@@ -16,13 +16,13 @@
   <!--========== PARALLAX ==========-->
   {% if purcaseProducts and purcaseProducts|length > 0 %}
     <div class="uk-height-large uk-background-cover uk-light uk-flex" uk-parallax="bgy: -300" style="background-image: url('/static/img/1920x1080/01.jpg');">
-      <h1 class="uk-width-1-2@m uk-text-center uk-margin-auto uk-margin-auto-vertical">Ваша корзина товаров</h1>
+      <h1 class="uk-width-1-2@m uk-text-center uk-margin-auto uk-margin-auto-vertical">{{ title }}</h1>
     </div>
   {% else %}
 {#    <div class="uk-height-large uk-background-cover uk-light uk-flex" uk-parallax="bgy: -100" style="background-image: url('/img/cart/_empty2.jpg');">#}
 {#      <h1 class="uk-width-1-2@m uk-text-center uk-margin-auto uk-margin-auto-vertical">{{ title }}</h1>#}
 {#    </div>#}
-    <img src="{% static '/img/cart/_empty2.jpg' %}" alt="img">
+    <img src="{% static '/img/cart/_empty2.jpg'%}">
   {% endif %}
   <!--========== END PARALLAX ==========-->
 
@@ -38,19 +38,17 @@
               <div id="cart">
                 <table class="uk-table uk-table-striped uk-table-hover uk-table-middle">
                   <caption></caption>
-                  {% for item in cart %}
-                    {% with product=item.product %}
-                      <tr id="product_{{ product.id }}">
-                        <td><i class="far fa-minus-square" size="24px" onclick="removeFromCartBtn('{{ config.schema|add:config.host }}{% url 'cart:CartRemove' product.id %}'); return !1;"></i></td>
-                        <td class="uk-table-link" width="100px">
-                          <a href="/product/{{ product.id }}">
-                            <img width="80px" src="{{ product.imgs.all.0 }}" alt="{{ product.title }}">
-                          </a>
-                        </td>
-                        <td>{{ product.title }}</td>
-                        <td><span class="price">{{ product.price }}</span><span>₽</span></td>
-                      </tr>
-                    {% endwith %}
+                  {% for product in purcaseProducts %}
+                    <tr id="product_{{ product.id }}">
+                      <td><i class="far fa-minus-square" size="24px" onclick="removeFromCartBtn('{{ settings.schema ~ settings.host ~ '/remove-from-cart?id=' ~ product.id }}', {{ product.id }}); return !1;"></i></td>
+                      <td class="uk-table-link" width="100px">
+                        <a href="{% url 'cart:CartRemove' product.id %}">
+                          <img width="80px" src="{{ product.imgs.0 }}" alt="Photo">
+                        </a>
+                      </td>
+                      <td>{{ product.title }}</td>
+                      <td><span class="price">{{ product.price }}</span><span>₽</span></td>
+                    </tr>
                   {% endfor %}
                     <tfooter>
                       <tr>
@@ -98,8 +96,4 @@
     <!-- Modal END -->
   {% endif %}
   <!--========== END CART ==========-->
-
-  <!--========== FOOTER ==========-->
-  {% include 'modules/footer.html' %}
-  <!--========== END FOOTER ==========-->
 {% endblock %}

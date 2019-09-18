@@ -11,7 +11,7 @@
     <!-- Topsale Products -->
     {% for product in top_sale %}
       <div class="col-sm-4 sm-margin-b-50">
-        <a class="link" href="/product/?id={{ product.id }}">
+        <a class="link" href="{% url 'shop:product' product.id %}">
           {#<div class="uk-text-center">#}
           {#    <div class="uk-inline-clip uk-transition-toggle" tabindex="0">#}
           {#        <img src="images/dark.jpg" alt="">#}

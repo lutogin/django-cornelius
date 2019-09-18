@@ -14,7 +14,7 @@ def index(req):
 
     slider_range = range(slider.count())
 
-    return render(req, 'shop/index.html', context={
+    return render(req, 'index.html', context={
         'title': 'Элитные изделия из кожи ручной работы',
         'configs': get_config(),
         'slider': slider,
@@ -31,8 +31,8 @@ def category_products(req, category_slug: str):
     category = Category.objects.get(slug=category_slug)
     products = Product.objects.filter(slug=category_slug)
 
-    return render(req, 'shop/products.html', context={
-        'title': f'Cornelius|{category.names}',
+    return render(req, 'category.html', context={
+        'title': category.names,
         'configs': get_config(),
         'products': products,
         'category': category,
@@ -45,8 +45,8 @@ def product_detail(req, p_id: int):
 
     cart_product_form = CartAddProductForm()
 
-    return render(req, 'shop/product.html', context={
-        'title': f'Cornelius|{product.title}',
+    return render(req, 'product.html', context={
+        'title': product.title,
         'configs': get_config(),
         'product': product,
         'cart_product_form': cart_product_form
