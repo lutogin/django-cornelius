@@ -3,7 +3,7 @@ from django.views.decorators.http import require_POST
 from django.http import HttpResponse
 
 from cart.cart import Cart
-from cart.forms import CartAddProductForm
+# from cart.forms import CartAddProductForm
 
 from shop.models import Product
 from core.get_config import get_config
@@ -35,6 +35,7 @@ def cart_remove(request, product_id):
 def cart_detail(request):
     cart = Cart(request)
     return render(request, 'detail.html', context={
+        'title': 'Ваша корзина товаров',
         'cart': cart,
         'configs': get_config()
     })

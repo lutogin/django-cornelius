@@ -1,7 +1,13 @@
-// Отработка кнопки удаления из корзины
-function removeFromCartBtn(url, id) {
-  fetch(url, { method: 'POST' })
-    .then(() => {
+/**
+ * Удаление из корзины
+ */
+function removeFromCartBtn(url) {
+  fetch(url, {
+    method: 'POST',
+    headers: {
+      'X-CSRFToken': getCookie('csrftoken'),
+    },
+  }).then(() => {
       UIkit.notification({
         message: '<i class="fas fa-backspace"></i><span>&nbsp;Товар удален</span>',
         status: 'warning',
@@ -23,9 +29,10 @@ function sendBuyRequest(contactName, contactType, contactData) {
 // Метод подсчета общей стоимости
 function calculateTotalPrice() {
   let priceses = document.querySelectorAll('.price');
+  let quantity = document.querySelectorAll('.p_quantity');
   let totalPrice = 0;
-  priceses.forEach((item) => {
-    totalPrice += parseInt(item.textContent);
+  priceses.forEach((item, index) => {
+    totalPrice += parseInt(item.textContent) * parseInt(quantity[index].value);
   });
   document.querySelector('.totalPrice').textContent = totalPrice;
 
@@ -37,9 +44,9 @@ function calculateTotalPrice() {
   }
 }
 
-
-
-
+/**
+ * Форма подтверждения заказа.
+ */
 // Подсчитывает сумму выбраных товаров
 document.addEventListener('DOMContentLoaded', () => {
   calculateTotalPrice();

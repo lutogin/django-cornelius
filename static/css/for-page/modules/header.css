@@ -1,0 +1,15 @@
+.header_cart__counter {
+    position: absolute;
+    font-size: 13px;
+    left: 3px;
+    color: white;
+    width: 21px;
+    height: 21px;
+    /*background: mediumvioletred;*/
+    background: #17bed2;
+    margin: 1em;
+    border-radius: 50%;
+    text-align: center;
+    vertical-align: middle;
+    opacity: .85;
+}

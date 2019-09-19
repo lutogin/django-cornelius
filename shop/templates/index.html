@@ -1,7 +1,11 @@
 {% extends 'base.html' %}
-
+{% load static %}
 {% block title_content %}
     {{ title }}
+{% endblock %}
+
+{% block additional_css %}
+  <link rel="stylesheet" href="{% static '/css/for-page/index.css' %}">
 {% endblock %}
 
 {% block body %}

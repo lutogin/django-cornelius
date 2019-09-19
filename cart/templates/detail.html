@@ -7,7 +7,7 @@
 {% endblock %}
 
 {% block title_content %}
-  Ваша корзина товаров
+  {{ title }}
 {% endblock %}
 
 {% block body %}
@@ -26,7 +26,7 @@
 
   <!--========== CART ==========-->
   {% if cart %}
-    <script src="{% static '/js/pages/shoping-cart/index.js' %}" defer></script>
+    <script src="{% static '/js/pages/shoping-cart.js' %}" defer></script>
     <div class="content-lg container">
       <div class="row margin-b-40">
         <div class="col-sm-12">
@@ -39,20 +39,30 @@
                   {% for item in cart %}
                     {% with product=item.product %}
                       <tr id="product_{{ product.id }}">
-                        <td><i class="far fa-minus-square" size="24px" onclick="removeFromCartBtn('{{ configs.schema|add:configs.host }}{% url 'cart:CartRemove' product.id %}'); return !1;"></i></td>
+                        <td><i class="far fa-minus-square" size="24px" onclick="removeFromCartBtn('{{ configs.schema|add:configs.host }}{% url 'cart:CartRemove' product.id %}', '{{ csrf_token }}'); return !1;"></i></td>
                         <td class="uk-table-link" width="100px">
                           <a href="{% url 'shop:product' product.id %}">
                             <img width="80px" src="{{ product.imgs.all.0 }}" alt="{{ product.title }}">
                           </a>
                         </td>
                         <td>{{ product.title }}</td>
+                        <td>
+                          <label for="p_quantity">Количетсво</label>
+                          <input name="quantity"
+                                 type="number"
+                                 class="p_quantity"
+                                 min="1"
+                                 max="999"
+                                 value="{{ item.quantity }}"
+                                 onchange="calculateTotalPrice()">
+                        </td>
                         <td><span class="price">{{ product.price }}</span><span>₽</span></td>
                       </tr>
                     {% endwith %}
                   {% endfor %}
                     <tfooter>
                       <tr>
-                        <td colspan="3">Предаварительная сумма заказа</td>
+                        <td colspan="4">Предаварительная сумма заказа</td>
                         <td><span class="totalPrice"></span><span>₽</span></td>
                       </tr>
                     </tfooter>
