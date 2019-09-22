@@ -584,15 +584,29 @@ h3, h4 {
     position: relative
 }
 
-.header .nav-item-hover:after {
-    position: absolute;
-    top: 45px;
-    left: 0;
-    width: 100%;
-    height: 2px;
-    background: #17bed2;
-    opacity: 0;
-    content: " ";
+/*.header .nav-item-hover:after {*/
+/*    position: absolute;*/
+/*    top: 50px;*/
+/*    left: 0;*/
+/*    width: 100%;*/
+/*    height: 2px;*/
+/*    background: #17bed2;*/
+/*    opacity: 0;*/
+/*    content: " ";*/
+/*    transition-duration: .4s;*/
+/*    transition-property: all;*/
+/*    transition-timing-function: cubic-bezier(.7, 1, .7, 1)*/
+/*}*/
+
+.header .nav-item {
+    color: white;
+    transition-duration: .4s;
+    transition-property: all;
+    transition-timing-function: cubic-bezier(.7, 1, .7, 1)
+}
+
+.header .nav-item-hover:hover {
+    color: #17bed2;
     transition-duration: .4s;
     transition-property: all;
     transition-timing-function: cubic-bezier(.7, 1, .7, 1)
@@ -714,6 +728,13 @@ h3, h4 {
 
     .page-on-scroll .header .nav-item-child {
         color: #515769;
+        transition-duration: .3s;
+        transition-property: all;
+        transition-timing-function: cubic-bezier(.7, 1, .7, 1)
+    }
+
+    .page-on-scroll .header .nav-item-child:hover {
+        color: #17bed2;
         transition-duration: .3s;
         transition-property: all;
         transition-timing-function: cubic-bezier(.7, 1, .7, 1)

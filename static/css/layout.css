@@ -691,13 +691,22 @@ fieldset[disabled] .btn-theme {
   position: relative;
 }
 
-.header .nav-item-hover:after {
-  position: absolute;
-  top: 45px;
-  left: 0;
-  width: 9px;
-  height: 2px;
-  background: #17bed2;
+/*.header .nav-item-hover:after {*/
+/*  position: absolute;*/
+/*  top: 50px;*/
+/*  left: 0;*/
+/*  width: 9px;*/
+/*  height: 2px;*/
+/*  background: #17bed2;*/
+/*  opacity: 0;*/
+/*  content: " ";*/
+/*  transition-duration: 400ms;*/
+/*  transition-property: all;*/
+/*  transition-timing-function: cubic-bezier(0.7, 1, 0.7, 1);*/
+/*}*/
+
+.header .nav-item-hover {
+  color: #17bed2;
   opacity: 0;
   content: " ";
   transition-duration: 400ms;

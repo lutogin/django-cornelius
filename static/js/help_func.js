@@ -21,33 +21,47 @@ function getCookie(name) {
 }
 
 /**
- * Универсальный метод для запроса к корзине.
+ * Универсальный метод для запросов работы с корзиной.
  *
- * @param url
- * @param type_msg
+ * @param {string} cart_event   Тип события(add/rm)
+ * @param {string} p_id         ID продукта.
  */
-function cartRequest(url, type_msg) {
+function cartRequest(cart_event, p_id) {
   const ADD_TO_CARD = 'add';
-  const DEL_FROM_CARD = 'del';
+  const DEL_FROM_CARD = 'rm';
 
-  $msg = '<i class="fas fa-shopping-cart"></i><span>&nbsp;</span>';
-  if (type_msg === ADD_TO_CARD) {
-    $msg = '<i class="fas fa-shopping-cart"></i><span>&nbsp;Товар добавлен</span>';
-  } else if (type_msg === DEL_FROM_CARD) {
-    $msg = '<i class="fas fa-backspace"></i><span>&nbsp;Товар удален</span>';
+  if (cart_event !== ADD_TO_CARD && cart_event !== DEL_FROM_CARD) {
+    console.error(`Wrong cart event! (${cart_event})`);
+    return;
   }
 
-  fetch(url, {
+  // Адреса запросов.
+  const url = {
+    'add': 'add',
+    'rm': 'remove',
+  };
+  // Сообщения.
+  const msg = {
+    'add': '<i class="fas fa-shopping-cart"></i><span>&nbsp;Товар добавлен</span>',
+    'rm': '<i class="fas fa-backspace"></i><span>&nbsp;Товар удален</span>'
+  };
+
+
+  current_url = url[cart_event];
+  console.log(current_url);
+  fetch(`http://127.0.0.1:8000/cart/${url[cart_event]}/${p_id}/`, {
     method: 'POST',
     headers: {
       'X-CSRFToken': getCookie('csrftoken'),
     },
   }).then(() => {
       UIkit.notification({
-        message: $msg,
+        message: msg[cart_event],
         status: 'primary',
         pos: 'bottom-right',
         timeout: 3000,
       });
-    }).catch(err => console.error(err));
+    })
+    .catch(err => console.error(err));
 }
+

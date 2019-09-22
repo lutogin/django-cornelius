@@ -26,7 +26,7 @@
       </div>
       <div class="col-sm-6">
         <button class="uk-button uk-button-primary uk-button-large pull-right"
-                onclick="addToCardBtn('{{ configs.schema|add:configs.host }}{% url "cart:CartAdd" product.id %}', '{{ csrf_token }}'); return !1;">Добавить в корзину
+                onclick="cartRequest('add', '{{ product.id  }}'); return !1;">Добавить в корзину
         </button>
       </div>
     </div>
