@@ -67,6 +67,6 @@ class Cart(object):
         del self.session[settings.CART_SESSION_ID]
         self.session.modified = True
 
-    def get_number_purchases(self):
+    def get_counter_purchases(self):
         """Возвращает количество товара в корзине"""
         return len(self.cart)

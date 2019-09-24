@@ -15,7 +15,6 @@ def index(req):
 
     return render(req, 'index.html', context={
         'title': 'Элитные изделия из кожи ручной работы',
-        'configs': get_config(),
         'slider': slider,
         'slider_range': slider_range,
         'reviews': reviews,
@@ -32,7 +31,6 @@ def category_products(req, category_slug: str):
 
     return render(req, 'category.html', context={
         'title': category.names,
-        'configs': get_config(),
         'products': products,
         'category': category,
     })
@@ -46,7 +44,6 @@ def product_detail(req, p_id: int):
 
     return render(req, 'product.html', context={
         'title': product.title,
-        'configs': get_config(),
         'product': product,
         # 'cart_product_form': cart_product_form
     })

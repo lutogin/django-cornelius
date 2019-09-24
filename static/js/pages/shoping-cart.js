@@ -1,29 +1,25 @@
 /**
- * Удаление из корзины
+ * Отрпавка сабмита.
+ *
+ * @param contactName
+ * @param contactType
+ * @param contactData
+ * @returns {Promise<Response>}
  */
-function removeFromCartBtn(url) {
-  fetch(url, {
+function sendBuyRequest(contactName, contactType, contactData) {
+  data = {
+    'contactName': contactName,
+    'contactType': contactType,
+    'contactData': contactData
+  };
+
+  return fetch('http://127.0.0.1:8000/cart/submit/', {
     method: 'POST',
     headers: {
       'X-CSRFToken': getCookie('csrftoken'),
     },
-  }).then(() => {
-      UIkit.notification({
-        message: '<i class="fas fa-backspace"></i><span>&nbsp;Товар удален</span>',
-        status: 'warning',
-        pos: 'bottom-right',
-        timeout: 3000,
-      });
-
-      // Удалим с таблици элемент
-      document.querySelector(`#product_${id}`).parentNode.removeChild(document.querySelector(`#product_${id}`));
-      calculateTotalPrice();
-    })
-    .catch(err => console.error(err));
-}
-
-function sendBuyRequest(contactName, contactType, contactData) {
-  return fetch(`/buy-request?contactName=${contactName}&contactType=${contactType}&contactData=${contactData}`, { method: 'POST' });
+    body: JSON.stringify(data)
+  });
 }
 
 // Метод подсчета общей стоимости
@@ -51,29 +47,29 @@ function calculateTotalPrice() {
 document.addEventListener('DOMContentLoaded', () => {
   calculateTotalPrice();
 
-  // Обработка клика
-  document.querySelector('#request-btn-submit').addEventListener('click', (evt) => {
-    if(document.querySelector('form.request-from #contactName').value.length === 0 ||
-      document.querySelector('form.request-from #contactData').value.length === 0)
-    {
-      evt.stopPropagation();
-      return;
-    }
-    evt.preventDefault();
-    const contactName = document.querySelector('#contactName').value;
-    const contactType = document.querySelector('#contactType').value;
-    const contactData = document.querySelector('#contactData').value;
-
-    sendBuyRequest(contactName, contactType, contactData)
-      .then(() => {
-        UIkit.modal(document.querySelector('#modal-request-buy')).hide();
-        UIkit.notification({
-          message: '<i class="fas fa-paper-plane"></i><span>&nbsp;Заявка отправлена, с вами свяжутся в ближайшее время</span>',
-          status: 'primary',
-          pos: 'bottom-right',
-          timeout: 3000,
-        });
-      })
-      .catch(err => console.error(err));
-  });
+  // Обработка клика подтверждение заказа
+  // document.querySelector('#request-btn-submit').addEventListener('click', (evt) => {
+  //   if(document.querySelector('form.request-from #contactName').value.length === 0 ||
+  //     document.querySelector('form.request-from #contactData').value.length === 0)
+  //   {
+  //     evt.stopPropagation();
+  //     return;
+  //   }
+  //   evt.preventDefault();
+  //   const contactName = document.querySelector('#contactName').value;
+  //   const contactType = document.querySelector('#contactType').value;
+  //   const contactData = document.querySelector('#contactData').value;
+  //
+  //   sendBuyRequest(contactName, contactType, contactData)
+  //     .then(() => {
+  //       UIkit.modal(document.querySelector('#modal-request-buy')).hide();
+  //       UIkit.notification({
+  //         message: '<i class="fas fa-paper-plane"></i><span>&nbsp;Заявка отправлена, с вами свяжутся в ближайшее время</span>',
+  //         status: 'primary',
+  //         pos: 'bottom-right',
+  //         timeout: 3000,
+  //       });
+  //     })
+  //     .catch(err => console.error(err));
+  // });
 });

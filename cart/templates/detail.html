@@ -87,7 +87,8 @@
     <div id="modal-request-buy" uk-modal>
       <div class="uk-modal-dialog uk-modal-body">
         <h2 class="uk-modal-title">Оставьте контактные данные для связи</h2>
-        <form action="" class="request-from">
+        <form action="{% url 'cart:CartSubmit' %}" method="post" class="request-from">
+          {% csrf_token %}
           <label for="contactName">Ваше имя</label>
           <input type="text" name="contactName" id="contactName" class="uk-input" required>
           <label for="contactType">Выберите удобный способ связи</label>

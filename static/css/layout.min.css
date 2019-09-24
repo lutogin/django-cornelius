@@ -1407,7 +1407,6 @@ h3, h4 {
 
 /*Корзина*/
 .shopping-cart {
-    /*visibility: hidden;*/
     float: right;
     position: absolute;
     top: 23px;
@@ -1417,10 +1416,14 @@ h3, h4 {
 
 }
 
-.shopping-cart.active {
-    visibility: visible;
-}
-
 .uk-table td {
     vertical-align: inherit !important;
+}
+
+.shopping-cart .header_cart__counter {
+    visibility: hidden;
+}
+
+.shopping-cart .header_cart__counter.active {
+    visibility: visible;
 }

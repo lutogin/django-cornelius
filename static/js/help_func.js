@@ -46,21 +46,44 @@ function cartRequest(cart_event, p_id) {
     'rm': '<i class="fas fa-backspace"></i><span>&nbsp;Товар удален</span>'
   };
 
-
-  current_url = url[cart_event];
-  console.log(current_url);
   fetch(`http://127.0.0.1:8000/cart/${url[cart_event]}/${p_id}/`, {
     method: 'POST',
     headers: {
       'X-CSRFToken': getCookie('csrftoken'),
     },
-  }).then(() => {
+  })
+    .then((res) => res.json())
+    .then((data) => {
+      cart_counter = document.querySelector('.header_cart__counter');
+
+      switch (cart_event) {
+        case ADD_TO_CARD:
+          cart_counter.innerText = data.counter;
+          if(!cart_counter.classList.contains('active')) {
+            cart_counter.classList.add('active');
+          }
+          break;
+
+        case DEL_FROM_CARD:
+          document.querySelector(`#product_${p_id}`).remove();
+          if(+data.counter > 0) {
+            cart_counter.innerText = data.counter;
+          } else {
+            cart_counter.classList.remove('active');
+            cart_counter.innerText = 0;
+          }
+
+          calculateTotalPrice();
+          break;
+      } // end swith
+
       UIkit.notification({
         message: msg[cart_event],
         status: 'primary',
         pos: 'bottom-right',
         timeout: 3000,
       });
+
     })
     .catch(err => console.error(err));
 }
