@@ -45,7 +45,7 @@ function cartRequest(cart_event, p_id) {
     'add': '<i class="fas fa-shopping-cart"></i><span>&nbsp;Товар добавлен</span>',
     'rm': '<i class="fas fa-backspace"></i><span>&nbsp;Товар удален</span>'
   };
-
+  //@todo адрес брать с конфига
   fetch(`http://127.0.0.1:8000/cart/${url[cart_event]}/${p_id}/`, {
     method: 'POST',
     headers: {
@@ -65,7 +65,7 @@ function cartRequest(cart_event, p_id) {
           break;
 
         case DEL_FROM_CARD:
-          document.querySelector(`#product_${p_id}`).remove();
+          document.querySelector(`#product-${p_id}`).remove();
           if(+data.counter > 0) {
             cart_counter.innerText = data.counter;
           } else {

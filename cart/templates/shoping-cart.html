@@ -39,7 +39,7 @@
                 <table class="uk-table uk-table-striped uk-table-hover uk-table-middle">
                   <caption></caption>
                   {% for product in purcaseProducts %}
-                    <tr id="product_{{ product.id }}">
+                    <tr id="product-{{ product.id }}">
                       <td><i class="far fa-minus-square" size="24px" onclick="removeFromCartBtn('{{ settings.schema ~ settings.host ~ '/remove-from-cart?id=' ~ product.id }}', {{ product.id }}); return !1;"></i></td>
                       <td class="uk-table-link" width="100px">
                         <a href="{% url 'cart:CartRemove' product.id %}">

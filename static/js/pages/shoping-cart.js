@@ -1,28 +1,12 @@
 /**
- * Отрпавка сабмита.
- *
- * @param contactName
- * @param contactType
- * @param contactData
- * @returns {Promise<Response>}
+ * Цена гравировки.
+ * @type {number}
  */
-function sendBuyRequest(contactName, contactType, contactData) {
-  data = {
-    'contactName': contactName,
-    'contactType': contactType,
-    'contactData': contactData
-  };
+const ENGRAVING_PRICE = 500;
 
-  return fetch('http://127.0.0.1:8000/cart/submit/', {
-    method: 'POST',
-    headers: {
-      'X-CSRFToken': getCookie('csrftoken'),
-    },
-    body: JSON.stringify(data)
-  });
-}
-
-// Метод подсчета общей стоимости
+/**
+ * Пересчитывает общую стоимость.
+ */
 function calculateTotalPrice() {
   let priceses = document.querySelectorAll('.price');
   let quantity = document.querySelectorAll('.p_quantity');
@@ -41,35 +25,83 @@ function calculateTotalPrice() {
 }
 
 /**
+ * Отработка checkbox с гравировкой.
+ *
+ * @param pid ID продукта
+ */
+function addEngraving(pid) {
+  let product_price_el = document.querySelector(`#product-${pid} #product-price`);
+  let price = +product_price_el.innerText;
+  let chk_box = document.querySelector(`#engr-product-${pid}`);
+  if (chk_box.checked) {
+    product_price_el.innerText = price + ENGRAVING_PRICE;
+  } else {
+    product_price_el.innerText = price - ENGRAVING_PRICE;
+  }
+
+  calculateTotalPrice();
+}
+
+/**
+ * Отрпавка сабмита.
+ *
+ * @param contactName
+ * @param contactType
+ * @param contactData
+ * @returns {Promise<Response>}
+ */
+function submitRequest(contactName, contactType, contactData) {
+  let data = {
+    'contactName': contactName,
+    'contactType': contactType,
+    'contactData': contactData
+  };
+
+  return fetch('http://127.0.0.1:8000/cart/submit/', {
+    method: 'POST',
+    headers: {
+      'X-CSRFToken': getCookie('csrftoken'),
+    },
+    body: JSON.stringify(data)
+  });
+}
+
+/**
  * Форма подтверждения заказа.
  */
-// Подсчитывает сумму выбраных товаров
 document.addEventListener('DOMContentLoaded', () => {
   calculateTotalPrice();
 
   // Обработка клика подтверждение заказа
-  // document.querySelector('#request-btn-submit').addEventListener('click', (evt) => {
-  //   if(document.querySelector('form.request-from #contactName').value.length === 0 ||
-  //     document.querySelector('form.request-from #contactData').value.length === 0)
-  //   {
-  //     evt.stopPropagation();
-  //     return;
-  //   }
-  //   evt.preventDefault();
-  //   const contactName = document.querySelector('#contactName').value;
-  //   const contactType = document.querySelector('#contactType').value;
-  //   const contactData = document.querySelector('#contactData').value;
-  //
-  //   sendBuyRequest(contactName, contactType, contactData)
-  //     .then(() => {
-  //       UIkit.modal(document.querySelector('#modal-request-buy')).hide();
-  //       UIkit.notification({
-  //         message: '<i class="fas fa-paper-plane"></i><span>&nbsp;Заявка отправлена, с вами свяжутся в ближайшее время</span>',
-  //         status: 'primary',
-  //         pos: 'bottom-right',
-  //         timeout: 3000,
-  //       });
-  //     })
-  //     .catch(err => console.error(err));
-  // });
+  document.querySelector('#confirm-order-form').addEventListener('submit', (evt) => {
+    if(document.querySelector('#confirm-order-form #contactName').value.length === 0 ||
+      document.querySelector('#confirm-order-form #contactData').value.length === 0)
+    {
+      evt.stopPropagation();
+      return;
+    }
+    evt.preventDefault();
+
+    UIkit.modal(document.querySelector('#modal-request-buy')).hide();
+    UIkit.modal(document.querySelector('#modal-submit-buy')).show();
+    UIkit.notification({
+      message: "Спасибо!",
+      status: 'primary',
+      pos: 'bottom-right',
+      timeout: 3000,
+    });
+
+    const contactName = document.querySelector('#contactName').value;
+    const contactType = document.querySelector('#contactType').value;
+    const contactData = document.querySelector('#contactData').value;
+    submitRequest(contactName, contactType, contactData)
+      .then((res) => res.json())
+      .then((data) => {
+
+        setTimeout(() => {
+          window.location.href = (data['url'])
+        }, 3000)
+      })
+      .catch(err => console.error(err));
+  });
 });

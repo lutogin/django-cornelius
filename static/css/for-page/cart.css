@@ -1,7 +1,10 @@
 #cart i.fas {
     font-size: 21px;
 }
-
 tbody tr {
     text-align: center;
+}
+input[type=checkbox],
+input[type=radio] {
+    margin: 0 0 3px 0 !important;
 }

@@ -15,18 +15,27 @@ class Cart(object):
 
         self.cart = cart
 
-    def add(self, product, quantity=1, update_quantity=False):
+    def add(self, product: Product, quantity: int = 1, update_quantity: bool = False):
         """Добавляет товара в корзину пользователя или обновляет количества товара."""
         product_id = str(product.id)
 
         if product_id not in self.cart:
-            self.cart[product_id] = {'quantity': 0, 'price': str(product.price)}
-
+            self.cart[product_id] = {'quantity': 0, 'price': str(product.price), 'engraving': False}
         if update_quantity:
             self.cart[product_id]['quantity'] = quantity
         else:
             self.cart[product_id]['quantity'] += quantity
 
+        self.save()
+
+    def update(self, product: Product, quantity: int = None, price: int = None, engraving: bool = None):
+        """Обновляет опции товара в корзине"""
+        product_id = str(product.id)
+        quantity = quantity or self.cart[product_id]['quantity']
+        engraving = engraving or self.cart[product_id]['engraving']
+        price = price or product.price
+
+        self.cart[product_id] = {'quantity': quantity, 'price': price, 'engraving': engraving}
         self.save()
 
     def save(self):
