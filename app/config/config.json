@@ -25,7 +25,7 @@
     },
     "ymapUrl": "https://api-maps.yandex.ru/services/constructor/1.0/js/?um=constructor%3A08f1710e70512b601ee6d8b516123beaefbbb43083c4cd2413c5315f7b27153e&amp;width=450&amp;height=250&amp;lang=ru_UA&amp;scroll=true",
     "contactTypeList": {
-        "tel": "Телефон",
+        "tel": "Телефон (+380)",
         "viber": "Viber",
         "telegram": "Telegram",
         "skype": "Skype",

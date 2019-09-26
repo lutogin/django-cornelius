@@ -3,6 +3,8 @@
  * @type {number}
  */
 const ENGRAVING_PRICE = 500;
+const CART_FORM = document.querySelector('#make-order-form');
+const CART_FORM_BTN = document.querySelector('#make-order-btn');
 
 /**
  * Пересчитывает общую стоимость.
@@ -43,7 +45,7 @@ function addEngraving(pid) {
 }
 
 /**
- * Отрпавка сабмита.
+ * Отрпавка сабмита формы подтверждения заказа.
  *
  * @param contactName
  * @param contactType
@@ -104,4 +106,32 @@ document.addEventListener('DOMContentLoaded', () => {
       })
       .catch(err => console.error(err));
   });
+});
+
+
+CART_FORM_BTN.addEventListener('click', (evt) => {
+  evt.preventDefault();
+  const prd_html_list = CART_FORM.querySelectorAll('.product-cart-item');
+
+  let products = {};
+  for (let i = 0; i < prd_html_list.length; i++) {
+    products[prd_html_list[i].querySelector('.product-id').value] = {
+      'quantity': prd_html_list[i].querySelector('.p_quantity').value,
+      'engraving': prd_html_list[i].querySelector('.engraving').checked
+    }
+    // products_el.push({
+    //   'pid': products[i].querySelector('.product-id').value,
+    //   'quantity': products[i].querySelector('.p_quantity').value,
+    //   'engraving': products[i].querySelector('.engraving').checked
+    // });
+  }
+
+  fetch('http://127.0.0.1:8000/cart/update/', {
+    method: 'POST',
+    headers: {
+      'X-CSRFToken': getCookie('csrftoken'),
+    },
+    body: JSON.stringify(products)
+  });
+
 });

@@ -28,14 +28,15 @@ class Cart(object):
 
         self.save()
 
-    def update(self, product: Product, quantity: int = None, price: int = None, engraving: bool = None):
+    def update(self, pid: int, quantity: int = None, engraving: bool = None, price: int = None):
         """Обновляет опции товара в корзине"""
-        product_id = str(product.id)
-        quantity = quantity or self.cart[product_id]['quantity']
-        engraving = engraving or self.cart[product_id]['engraving']
+        product = Product.objects.get(id=pid)
+        quantity = quantity or self.cart[pid]['quantity']
+        engraving = self.cart[pid]['engraving'] if engraving == None else engraving
         price = price or product.price
+        # @todo пофиксить изменение цены при выборе гравировки
 
-        self.cart[product_id] = {'quantity': quantity, 'price': price, 'engraving': engraving}
+        self.cart[pid] = {'quantity': quantity, 'price': price, 'engraving': engraving}
         self.save()
 
     def save(self):
@@ -79,3 +80,8 @@ class Cart(object):
     def get_counter_purchases(self):
         """Возвращает количество товара в корзине"""
         return len(self.cart)
+
+    def get_cart_pid(self):
+        product_ids = self.cart.keys()
+        for pid in product_ids:
+            yield pid

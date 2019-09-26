@@ -31,67 +31,77 @@
     <div class="content-lg container">
       <div class="row margin-b-40">
         <div class="col-sm-12">
-          <div class="col-sm-2"></div>
-          <div class="col-sm-8">
+{#          <div class="col-sm-2"></div>#}
+{#          <div class="col-sm-8">#}
             <div class="row margin-b-50">
               <div id="cart">
-                <table class="uk-table uk-table-striped uk-table-hover uk-table-middle">
-                  <caption></caption>
-                  {% for item in cart %}
-                    {% with product=item.product %}
-                      <tr id="product-{{ product.id }}">
-                        <td>
-                          <a onclick="cartRequest('rm', '{{ product.id }}'); return !1;">
-                            <i class="fas fa-minus-circle"></i>
-                          </a>
-                        </td>
-                        <td class="uk-table-link" width="100px">
-                          <a href="{% url 'shop:product' product.id %}">
-                            <img width="80px" src="{{ product.imgs.all.0 }}" alt="{{ product.title }}">
-                          </a>
-                        </td>
-                        <td>{{ product.title }}</td>
-                        <td>
-                          <label for="p_quantity">Количетсво</label>
-                          <input name="quantity"
-                                 type="number"
-                                 class="p_quantity"
-                                 min="1"
-                                 max="999"
-                                 value="{{ item.quantity }}"
-                                 onchange="calculateTotalPrice()">
-                        </td>
-                        <td>
-                          <label>
-                            <input id="engr-product-{{ product.id }}"
-                                   class="uk-checkbox"
-                                   type="checkbox"
-                                   name="engr-product-{{ product.id }}"
-                                   onchange="addEngraving('{{ product.id }}')">
-                            Выполнить гравировку
-                          </label>
-                        </td>
-                        <td><span id="product-price" class="price">{{ product.price }}</span><span>₽</span></td>
-                      </tr>
-                    {% endwith %}
-                  {% endfor %}
-                    <tfooter>
-                      <tr>
-                        <td colspan="5">Предаварительная сумма заказа</td>
-                        <td><span class="totalPrice"></span><span>₽</span></td>
-                      </tr>
-                    </tfooter>
-                </table>
-                <div class="uk-flex uk-flex-around">
-                  <button class="uk-button uk-button-primary request" onclick="" uk-toggle="target: #modal-request-buy">Оставить заявку</button>
-                </div>
+                <form id="make-order-form" action="{% url 'cart:CartUpdate' %}">
+                  <table class="uk-table uk-table-striped uk-table-hover uk-table-middle">
+                    <caption></caption>
+                    {% for item in cart %}
+                      {% with product=item.product %}
+                        <tr id="product-{{ product.id }}" class="product-cart-item">
+                          <td>
+                            <a onclick="cartRequest('rm', '{{ product.id }}'); return !1;">
+                              <i class="fas fa-minus-circle"></i>
+                            </a>
+                          </td>
+                          <td class="uk-table-link" width="100px">
+                            <a href="{% url 'shop:product' product.id %}">
+                              <img width="80px" src="{{ product.imgs.all.0 }}" alt="{{ product.title }}">
+                            </a>
+                            <input type="hidden" class="product-id" name="pid-{{ product.id }}" value="{{ product.id }}">
+                          </td>
+                          <td>{{ product.title }}</td>
+                          <td>
+                            <label for="p_quantity">Количетсво</label>
+                            <input name="quantity-{{ product.id }}"
+                                   type="number"
+                                   class="p_quantity"
+                                   min="1"
+                                   max="999"
+                                   value="{{ item.quantity }}"
+                                   onchange="calculateTotalPrice()">
+                          </td>
+                          <td>
+                            <label uk-tooltip="Обсуждается индивидуально.">
+                              <input id="engr-product-{{ product.id }}"
+                                     class="uk-checkbox engraving"
+                                     type="checkbox"
+                                     name="engr-product-{{ product.id }}"
+                                     onchange="addEngraving('{{ product.id }}')"
+                                     {% if item.engraving %}checked{% endif %}>
+                              Выполнить гравировку
+                            </label>
+                          </td>
+                          <td>
+                            <span id="product-price" class="price product-price">{{ product.price }}</span><span>₽</span>
+                          </td>
+                        </tr>
+                      {% endwith %}
+                    {% endfor %}
+                      <tfooter>
+                        <tr>
+                          <td colspan="5">Предаварительная сумма заказа</td>
+                          <td><span class="totalPrice"></span><span>₽</span></td>
+                        </tr>
+                      </tfooter>
+                  </table>
+                  <div class="uk-flex uk-flex-around">
+                    <button type="submit" id="make-order-btn" class="uk-button uk-button-primary request" uk-toggle="target: #modal-request-buy">Оставить заявку</button>
+                  </div>
+                </form>
               </div>
             </div>
-          </div>
-          <div class="col-sm-2"></div>
+{#          </div>#}
+{#          <div class="col-sm-2"></div>#}
         </div>
       </div>
     </div>
+
+
+
+
 
     <!-- This is the modal form -->
     <div id="modal-request-buy" uk-modal>
@@ -119,6 +129,9 @@
     </div>
     <!-- Modal END -->
 
+
+
+
     <!-- This is the modal sumbit -->
     <div id="modal-submit-buy" uk-modal>
       <div class="uk-modal-dialog uk-modal-body">
@@ -129,6 +142,8 @@
           </p>
       </div>
     </div>
+
+
     <!-- Modal END -->
   {% endif %}
   <!--========== END CART ==========-->

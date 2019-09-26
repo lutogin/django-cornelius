@@ -31,12 +31,31 @@ def cart_remove(req, product_id):
     return HttpResponse(json.dumps({'counter': cart.get_counter_purchases()}), status=200)
 
 
+@require_POST
+def cart_update(req):
+    body_unicode = req.body.decode('utf-8')
+    body = json.loads(body_unicode)
+    cart = Cart(req)
+
+    for pid in cart.get_cart_pid():
+        post_data = body[str(pid)]
+        cart.update(pid, int(post_data['quantity']), post_data['engraving'])
+
+    return HttpResponse(status=200)
+
+
 def cart_detail(req):
     cart = Cart(req)
     return render(req, 'detail.html', context={
         'title': 'Ваша корзина товаров',
         'cart': cart
     })
+
+
+@require_POST
+def get_cart_api(req):
+    cart = Cart(req)
+    return HttpResponse(json.dumps({'cart': cart.cart}), status=200)
 
 
 @require_POST
