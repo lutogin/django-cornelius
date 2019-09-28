@@ -19,14 +19,14 @@
             <span>Гравировка: {{ item.engraving }}</span>
           </td>
           <td>
-            <span>Предварительная цена за еденицу: {% if item.price %}{{ item.price }}{% else %}{{ product.price }}{% endif %}</span><span>₽</span>
+            <span>Цена за еденицу: {% if item.price %}{{ item.price }}{% else %}{{ product.price }}{% endif %}</span><span>₽</span>
           </td>
         </tr>
       {% endwith %}
     {% endfor %}
   </table>
   <hr>
-  <p>Предварительная сумма заказа: {{ cart.get_total_price }}</p>
+  <p>Предварительная сумма заказа: {{ cart.get_total_price }}<span>₽</span></p>
   <hr>
   <div>
     <p>Заказчик: {{ contact_name }}</p>

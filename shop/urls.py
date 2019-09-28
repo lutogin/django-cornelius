@@ -1,5 +1,5 @@
 from django.urls import path, re_path
-from shop.views import index, category_products, product_detail
+from shop.views import *
 
 app_name = 'shop'
 
