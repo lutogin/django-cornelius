@@ -14,7 +14,7 @@
 {% block body %}
   <!--========== PARALLAX ==========-->
   {% if cart %}
-    <div class="uk-height-large uk-background-cover uk-light uk-flex" uk-parallax="bgy: -300" style="background-image: url('/static/img/1920x1080/01.jpg');">
+    <div class="uk-height-medium uk-background-cover uk-light uk-flex" uk-parallax="bgy: -300" style="background-image: url('/static/img/1920x1080/01.jpg');">
       <h1 class="uk-width-1-2@m uk-text-center uk-margin-auto uk-margin-auto-vertical">Ваша корзина товаров</h1>
     </div>
   {% else %}
@@ -75,7 +75,14 @@
                             </label>
                           </td>
                           <td>
-                            <span id="product-price" class="price product-price">{{ product.price }}</span><span>₽</span>
+                            <span id="product-price" class="price product-price">
+                              {% if item.price %}
+                                {{item.price}}
+                              {% else %}
+                                {{product.price }}
+                              {% endif %}
+                            </span>
+                            <span>₽</span>
                           </td>
                         </tr>
                       {% endwith %}

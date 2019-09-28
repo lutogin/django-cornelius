@@ -43,7 +43,9 @@ INSTALLED_APPS = [
     'captcha',
     'core',
     'shop',
-    'cart'
+    'cart',
+    'order',
+    'customer'
 ]
 
 MIDDLEWARE = [

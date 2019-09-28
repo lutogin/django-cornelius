@@ -3,11 +3,16 @@ from django.views.decorators.http import require_POST
 from django.http import HttpResponse
 from django.urls import reverse
 from django.core.mail import EmailMessage
+from django.core.mail import EmailMultiAlternatives
+from django.template.loader import render_to_string
 
-from cart.cart import Cart
-from shop.models import Product
-from cart.forms import CartSubmitOrder
 from core.get_config import get_config
+
+from shop.models import Product
+from customer.models import Customer
+from order.models import Order
+from cart.cart import Cart
+from cart.forms import CartSubmitOrder
 
 import json
 
@@ -35,6 +40,8 @@ def cart_remove(req, product_id):
 
 @require_POST
 def cart_update(req):
+    """Сохранить изменения в корзине"""
+    # Пример получения данных с body запроса
     body_unicode = req.body.decode('utf-8')
     body = json.loads(body_unicode)
     cart = Cart(req)
@@ -66,7 +73,6 @@ def get_cart_api(req):
 @require_POST
 def cart_submit(req):
     """Сабмит заказа"""
-
     form = CartSubmitOrder(req.POST)
     if not form.is_valid():
         return HttpResponse(status=500)
@@ -74,38 +80,38 @@ def cart_submit(req):
     config = get_config()
     cart = Cart(req)
 
-    # body_unicode = req.body.decode('utf-8')
-    # body = json.loads(body_unicode)
-    #
-    # contact_name = body['contact_name']
-    # contact_type = config['contactTypeList'][body['contact_type']]
-    # contact_data = body['contact_data']
+    customer = Customer.objects.get_or_create(
+        contact_name=form.cleaned_data['contact_name'],
+        contact_type=form.cleaned_data['contact_type'],
+        contact_data=form.cleaned_data['contact_data']
+    )
+    customer = customer[0] # При get_or_create вернет tuple (obj, bool)
 
-    contact_name = form.cleaned_data['contact_name']
-    contact_type = form.cleaned_data['contact_type']
-    contact_data = form.cleaned_data['contact_data']
+    order = Order.objects.create(
+        customer=customer,
+        total_price=cart.get_total_price()
+    )
+    order.products.set(cart.get_cart_products()) # Для manyToManyField используем SET
+    order.save()
 
-    body = ''
+    text_content = ''
     for pid, val in cart.cart.items():
-        body += f'Товар: {reverse("shop:product", args=pid)} | количество: {val["quantity"]} | цена за еденицу: {val["price"]}'
-    body += f'Покупатель {contact_name}, способ связи: {contact_type}: {contact_data}'
+        text_content += f'Товар: {reverse("shop:product", args=pid)} | Количество: {val["quantity"]} | Цена за еденицу: {val["price"]} \n'
+    text_content += f'Покупатель {customer.contact_name} | Cпособ связи: {config["contactTypeList"][customer.contact_type]}: {customer.contact_data}'
 
-    email = EmailMessage(f'Заказ на {config["companyName"]}', body, to=['lutogin@gmail.com'])
+    html_content = render_to_string('order-mail.html', {
+        'cart': cart,
+        'contact_name': customer.contact_name,
+        'contact_type': config["contactTypeList"][customer.contact_type],
+        'contact_data': customer.contact_data,
+        'host': get_config()['host']
+    })
+
+    subject, from_email, to = f'Заказ на {config["companyName"]}', '', 'lutogin@gmail.com'
+    email = EmailMultiAlternatives(subject, text_content, to=[to])
+    email.attach_alternative(html_content, "text/html")
     email.send()
+
     cart.clear()
 
     return render(req, 'order-completed.html', context={'title': 'Заказ успешно получен!'})
-
-
-@require_POST
-def form_check(req):
-    """Проверка правильности заполнения формы"""
-    body_unicode = req.body.decode('utf-8')
-    body = json.loads(body_unicode)
-    data = {
-        'contact_name': body['contact_name'],
-        'contact_type': body['contact_type'],
-        'contact_data': body['contact_data']
-    }
-
-

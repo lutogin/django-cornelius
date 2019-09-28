@@ -99,17 +99,18 @@ class Product(models.Model):
     available = models.BooleanField(verbose_name='Наличие товара', default=True)
     is_top_sale = models.BooleanField(verbose_name='Топ продаж', default=True)
     imgs = models.ManyToManyField(Photo, verbose_name='Фото товара', related_name='imgs')
+    created_date = models.DateTimeField(auto_now_add=True, blank=True)
 
     def get_absolute_url(self):
         return reverse('shop:ProductDetail', args=[self.id, self.slug])
 
     class Meta:
-        ordering = ['title']
+        ordering = ['title', '-created_date']
         verbose_name = 'Продукт'
         verbose_name_plural = 'Продукты'
 
     def __str__(self):
-        return self.title
+        return f'{self.title} - id{self.id}'
 
 
 class MainSlider(models.Model):

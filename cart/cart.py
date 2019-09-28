@@ -4,6 +4,8 @@ from shop.models import Product
 
 
 class Cart(object):
+    __ENGRAVING_PRICE = 500
+
     def __init__(self, request):
         # Инициализация корзины пользователя
         self.session = request.session
@@ -28,12 +30,12 @@ class Cart(object):
 
         self.save()
 
-    def update(self, pid: int, quantity: int = None, engraving: bool = None, price: int = None):
+    def update(self, pid: int, quantity: int = None, engraving: bool = None):
         """Обновляет опции товара в корзине"""
         product = Product.objects.get(id=pid)
         quantity = quantity or self.cart[pid]['quantity']
         engraving = self.cart[pid]['engraving'] if engraving == None else engraving
-        price = price or product.price
+        price = product.price + int(__class__.__ENGRAVING_PRICE if engraving else 0)
         # @todo пофиксить изменение цены при выборе гравировки
 
         self.cart[pid] = {'quantity': quantity, 'price': price, 'engraving': engraving}
@@ -82,6 +84,13 @@ class Cart(object):
         return len(self.cart)
 
     def get_cart_pid(self):
+        """Возвращает ID продуктов в корзине"""
         product_ids = self.cart.keys()
         for pid in product_ids:
             yield pid
+
+    def get_cart_products(self):
+        """Возвращает генератор с продуктами в корзине"""
+        pid = [id for id in self.cart.keys()]
+
+        return Product.objects.filter(id__in=pid)
