@@ -88,3 +88,21 @@ function cartRequest(cart_event, p_id) {
     .catch(err => console.error(err));
 }
 
+/**
+ * Метод отправки запроса.
+ *
+ * @param {string} url
+ * @param {string} method
+ * @param {obj} data
+ * @returns {Promise<Response>}
+ */
+function makeReq(url, method, data) {
+
+  return fetch(url, {
+    method: method,
+    headers: {
+      'X-CSRFToken': getCookie('csrftoken'),
+    },
+    body: JSON.stringify(data)
+  });
+}

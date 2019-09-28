@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block additional_css %}
+{#  <link href="{% static '/lib/admin/fontawesome-free/css/all.min.css' %}" rel="stylesheet" type="text/css">#}
+  <link href="{% static '/css/for-page/cart.css' %}" rel="stylesheet" type="text/css">
+{% endblock %}
+
+{% block title_content %}
+  {{ title }}
+{% endblock %}
+
+{% block body %}
+  <!--========== PARALLAX ==========-->
+    <div class="uk-height-large uk-background-cover uk-light uk-flex" uk-parallax="bgy: -300" style="background-image: url('/static/img/1920x1080/01.jpg');">
+      <h1 class="uk-width-1-2@m uk-text-center uk-margin-auto uk-margin-auto-vertical">Спасибо за покупку! С вами свяжутся наши специалисты в ближайшее время.</h1>
+    </div>
+  <!--========== END PARALLAX ==========-->
+{% endblock %}

@@ -41,5 +41,9 @@
             "pass": "9492496329"
         }
     },
-    "mainMail": "handmadecornelius@gmail.com"
+    "mainMail": "handmadecornelius@gmail.com",
+    "g_captcha": {
+        "use_key": "6LdsyroUAAAAAAR278Z5cZECjTqH25FtYJbIJ0Ju",
+        "api_key": "6LdsyroUAAAAACJDwqEzAIfzzkxw9T0O_0rQ9RFf"
+    }
 }

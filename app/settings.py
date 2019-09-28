@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'captcha',
     'core',
     'shop',
     'cart'
@@ -100,6 +101,10 @@ EMAIL_PORT = 587
 EMAIL_HOST_USER = 'hekto.v8@gmail.com'
 EMAIL_HOST_PASSWORD = 'Qz314159'
 
+RECAPTCHA_PUBLIC_KEY = '6LdsyroUAAAAAAR278Z5cZECjTqH25FtYJbIJ0Ju'
+RECAPTCHA_PRIVATE_KEY = '6LdsyroUAAAAACJDwqEzAIfzzkxw9T0O_0rQ9RFf'
+# RECAPTCHA_PROXY = {'http': 'http://127.0.0.1:8000', 'https': 'https://127.0.0.1:8000'}
+RECAPTCHA_DOMAIN = 'www.recaptcha.net'
 # Password validation
 # https://docs.djangoproject.com/en/2.2/ref/settings/#auth-password-validators
 

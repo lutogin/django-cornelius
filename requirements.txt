@@ -1,3 +1,4 @@
 Django>=2.2.4,<2.3.0
 Pillow>=6.1.0,<6.2.0
 djangorestframework>=3.10.3,<3.11.0
+django-recaptcha>=2.0.5,<2.1.0

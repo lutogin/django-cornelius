@@ -109,16 +109,17 @@
         <h2 class="uk-modal-title">Оставьте контактные данные для связи</h2>
         <form action="{% url 'cart:CartSubmit' %}" method="post" class="request-from" id="confirm-order-form">
           {% csrf_token %}
-          <label for="contactName">Ваше имя</label>
-          <input type="text" name="contactName" id="contactName" class="uk-input" required>
-          <label for="contactType">Выберите удобный способ связи</label>
-          <select name="contactType" id="contactType" class="uk-select">
-            {% for type, val in configs.contactTypeList.items %}
-              <option name="contactType" value="{{ type }}">{{ val }}</option>
-            {% endfor %}
-          </select>
-          <label for="contactData">Контактные данные</label>
-          <input type="text" class="uk-input" name="contactData" id="contactData" required>
+          {{ submit_order_form }}
+{#          <label for="contactName">Ваше имя</label>#}
+{#          <input type="text" name="contact_name" id="contact_name" class="uk-input" required>#}
+{#          <label for="contact_type">Выберите удобный способ связи</label>#}
+{#          <select name="contact_type" id="contact_type" class="uk-select">#}
+{#            {% for type, val in configs.contactTypeList.items %}#}
+{#              <option name="contact_type" value="{{ type }}">{{ val }}</option>#}
+{#            {% endfor %}#}
+{#          </select>#}
+{#          <label for="contactData">Контактные данные</label>#}
+{#          <input type="text" class="uk-input" name="contact_data" id="contact_data" required>#}
 
           <p class="uk-text-right uk-margin-top">
             <button class="uk-button uk-button-default uk-modal-close" type="button">Отмена</button>
