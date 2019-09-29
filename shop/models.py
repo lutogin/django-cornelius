@@ -91,10 +91,18 @@ class Photo(models.Model):
 
 class Product(models.Model):
     """Базовая модель продукта."""
+
+    COLOR_CHOISE = (
+        ('brown', 'Коричневый(стандартный)'),
+        ('red', 'Красный'),
+        ('blue', 'Синий'),
+    )  # Структура для передачи в choices
+
     title = models.CharField(max_length=255, verbose_name='Титл товара')
     type = models.ForeignKey(Category, on_delete=models.SET_NULL, null=True)
     slug = models.SlugField(max_length=200, db_index=True)
     description = models.TextField(verbose_name='Подробное описание товара')
+    color = models.CharField(max_length=10, choices=COLOR_CHOISE, default='b', verbose_name='Тип связи', blank=True)
     price = models.IntegerField(verbose_name='Цена')
     available = models.BooleanField(verbose_name='Наличие товара', default=True)
     is_top_sale = models.BooleanField(verbose_name='Топ продаж', default=True)
