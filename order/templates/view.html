@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Заказ</title>
+</head>
+<body>
+  <p>Заказа# {{ order.id }}</p>
+  <p>Заказчик: {{ order.customer.contact_name }}, {{ order.customer.contact_type }}: {{ order.customer.contact_data }}</p>
+  <table>
+    <thead>
+      <tr>
+        <td>Товар</td>
+      </tr>
+    </thead>
+    {% for product in order.products %}
+      <tr>
+        <td>{{ product.title }}</td>
+      </tr>
+    {% endfor %}
+  </table>
+  <p>Предварительная сумма заказа: {{ order.total_price }}р.</p>
+</body>
+</html>

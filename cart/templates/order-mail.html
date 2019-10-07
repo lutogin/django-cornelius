@@ -10,13 +10,13 @@
       {% with product=item.product %}
         <tr id="product-{{ product.id }}" class="product-cart-item">
           <td>
-            <a href="{{ host }}/{% url 'shop:product' product.id %}">{{ product.title }}</a>
+            <a href="{{ product_link }}{{ product.id }}">{{ product.title }}</a>
           </td>
           <td>
             <span>Количество: {{ item.quantity }}</span>
           </td>
           <td>
-            <span>Гравировка: {{ item.engraving }}</span>
+            <span>Гравировка: {% if item.engraving %}ДА{% else %}НЕТ{% endif %}</span>
           </td>
           <td>
             <span>Цена за еденицу: {% if item.price %}{{ item.price }}{% else %}{{ product.price }}{% endif %}</span><span>₽</span>
@@ -31,6 +31,9 @@
   <div>
     <p>Заказчик: {{ contact_name }}</p>
     <p>{{ contact_type }}: {{ contact_data }}</p>
+  </div>
+  <div>
+{#    <p><a href="{{ order_link }}">Заказ</a></p>#}
   </div>
 </body>
 </html>

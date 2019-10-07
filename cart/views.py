@@ -96,15 +96,19 @@ def cart_submit(req):
 
     text_content = ''
     for pid, val in cart.cart.items():
-        text_content += f'Товар: {reverse("shop:product", args=pid)} | Количество: {val["quantity"]} | Цена за еденицу: {val["price"]} \n'
-    text_content += f'Покупатель {customer.contact_name} | Cпособ связи: {config["contactTypeList"][customer.contact_type]}: {customer.contact_data}'
+        # product = Product.objects.get_object_or_404(id=int(pid))
+        text_content += 'Товар: <a href="' + reverse("shop:product", args=pid) + '">Продукт</a> | '
+        text_content += f'Количество: {val["quantity"]} | Цена за еденицу: {val["price"]} \n'
+    text_content += f'Покупатель {customer.contact_name} | Cпособ связи: {config["contactTypeList"][customer.contact_type]}: {customer.contact_data} \n'
+    text_content += 'Заказ: <a href="' + reverse("order:OrderView")
 
     html_content = render_to_string('order-mail.html', {
         'cart': cart,
         'contact_name': customer.contact_name,
         'contact_type': config["contactTypeList"][customer.contact_type],
         'contact_data': customer.contact_data,
-        'host': get_config()['host']
+        'product_link': config['schema'] + config['host'] + '/product/',
+        # 'order_link': config['schema'] + config['host'] + reverse("order:OrderView"),
     })
 
     subject, from_email, to = f'Заказ на {config["companyName"]}', '', 'lutogin@gmail.com'
