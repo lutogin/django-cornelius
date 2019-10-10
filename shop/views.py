@@ -47,3 +47,12 @@ def product_detail(req, p_id: int):
         'product': product,
         # 'cart_product_form': cart_product_form
     })
+
+
+def engraving(req):
+    engraving_obj = Product.objects.filter(type__slug='engraving')
+
+    return render(req, 'engraving.html', context={
+        'title': 'Примеры выполнения гравировок',
+        'engraving': engraving_obj
+    })

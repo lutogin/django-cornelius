@@ -12,7 +12,7 @@ def product_image_file_path(instance, filename):
     ext = filename.split('.')[-1]
     filename = f'{uuid.uuid4()}.{ext}'
 
-    return os.path.join('/img/products/', filename)
+    return os.path.join('img/products/', filename)
 
 
 def slider_image_file_path(instance, filename):
@@ -20,7 +20,7 @@ def slider_image_file_path(instance, filename):
     ext = filename.split('.')[-1]
     filename = f'{uuid.uuid4()}.{ext}'
 
-    return os.path.join('/img/slider/', filename)
+    return os.path.join('img/slider/', filename)
 
 
 def our_clients_image_file_path(instance, filename):
@@ -28,7 +28,7 @@ def our_clients_image_file_path(instance, filename):
     ext = filename.split('.')[-1]
     filename = f'{uuid.uuid4()}.{ext}'
 
-    return os.path.join('/img/clients/', filename)
+    return os.path.join('img/clients/', filename)
 
 
 def works_image_file_path(instance, filename):
@@ -36,7 +36,7 @@ def works_image_file_path(instance, filename):
     ext = filename.split('.')[-1]
     filename = f'{uuid.uuid4()}.{ext}'
 
-    return os.path.join('/img/works/', filename)
+    return os.path.join('img/works/', filename)
 
 
 class Category(models.Model):
@@ -98,9 +98,20 @@ class Product(models.Model):
         ('blue', 'Синий'),
     )  # Структура для передачи в choices
 
+    SLUG_CHOISE = (
+        ('accessory', 'Аксессуар'),
+        ('bag', 'Сумка'),
+        ('belt', 'Ремень'),
+        ('cover', 'Обложка'),
+        ('engraving', 'Гравировка'),
+        ('housekeeper', 'Ключница'),
+        ('portmone', 'Портмоне'),
+        ('purse', 'Кошелек'),
+    )
+
     title = models.CharField(max_length=255, verbose_name='Титл товара')
     type = models.ForeignKey(Category, on_delete=models.SET_NULL, null=True)
-    slug = models.SlugField(max_length=200, db_index=True)
+    slug = models.SlugField(max_length=200, choices=SLUG_CHOISE, db_index=True)
     description = models.TextField(verbose_name='Подробное описание товара')
     color = models.CharField(max_length=10, choices=COLOR_CHOISE, default='b', verbose_name='Тип связи', blank=True)
     price = models.IntegerField(verbose_name='Цена')

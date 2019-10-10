@@ -1,10 +1,42 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>$Title$</title>
-</head>
-<body>
-  $END$
-</body>
-</html>
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title_content %}
+  {{ title }}
+{% endblock %}
+
+{% block additional_js %}
+  <script type="text/javascript" src="{% static '/js/pages/product.js' %}"></script>
+{% endblock %}
+
+{% block body %}
+  <!--========== PARALLAX ==========-->
+  <div class="uk-height-medium uk-background-cover uk-light uk-flex" uk-parallax="bgy: -300"
+       style='background-image: url({% static "/img/1920x1080/01.jpg" %});'>
+    <h1 class="uk-width-1-2@m uk-text-center uk-margin-auto uk-margin-auto-vertical">{{ title }}</h1>
+  </div>
+  <!--========== PARALLAX ==========-->
+
+  <!--========== Контент продукта ==========-->
+  <div class="content-lg container">
+    <div class="row margin-b-40">
+      <div class="col-sm-6">
+        <h2>{{ product.title }} - {{ product.price }}р.</h2>
+        <p>{{ product.description }}</p>
+      </div>
+    </div>
+
+    <div uk-lightbox class="row margin-b-50">
+      {% for img in engraving_obj.imgs.all %}
+        <div class="col-sm-4 sm-margin-b-50">
+          <div class="margin-b-20">
+            <div class="wow zoomIn" data-wow-duration=".3" data-wow-delay=".1s">
+              <a class="uk-button" href="{{ img }}"><img class="img-responsive uk-card-hover" src="{{ img }}" alt="Img"></a>
+            </div>
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+  <!--========== END Контент продукта ==========-->
+{% endblock %}

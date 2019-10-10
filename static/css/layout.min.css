@@ -613,6 +613,16 @@ h3, h4 {
 }
 
 @media (max-width: 991px) {
+    .header .shopping-cart {
+        float: left;
+        top: unset;
+        right: unset;
+        margin-left: 15px;
+    }
+    .header .shopping-cart svg path {
+        fill: dimgray;
+    }
+
     .header {
         background: #fff
     }
@@ -1408,9 +1418,9 @@ h3, h4 {
 /*Корзина*/
 .shopping-cart {
     float: right;
-    position: absolute;
-    top: 23px;
-    right: 50px;
+    position: inherit;
+    top: 15px;
+    right: -40px;
     z-index: 100;
     width: 25px;
 
