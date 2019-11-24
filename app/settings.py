@@ -30,6 +30,8 @@ ALLOWED_HOSTS = [
     '127.0.0.1:8000',
 ]
 
+MAIN_HOST = 'http://127.0.0.1:3000/'
+
 
 # Application definition
 
@@ -173,3 +175,5 @@ STATICFILES_DIRS = [
 AUTH_USER_MODEL = 'core.User'
 
 CART_SESSION_ID = 'cart'
+
+PYTHONHTTPSVERIFY=0

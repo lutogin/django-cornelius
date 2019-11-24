@@ -1,6 +1,10 @@
 {% extends 'base.html' %}
 {% load static %}
 
+{% block csfr %}
+  {% csrf_token %}
+{% endblock %}
+
 {% block title_content %}
   {{ title }}
 {% endblock %}
