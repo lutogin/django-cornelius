@@ -5,6 +5,7 @@ from django.urls import reverse
 from django.core.mail import EmailMessage
 from django.core.mail import EmailMultiAlternatives
 from django.template.loader import render_to_string
+from django.conf import settings
 
 from core.get_config import get_config
 
@@ -13,6 +14,7 @@ from customer.models import Customer
 from order.models import Order
 from cart.cart import Cart
 from cart.forms import CartSubmitOrder
+from cart.service import CartService
 
 import json
 
@@ -73,49 +75,4 @@ def get_cart_api(req):
 @require_POST
 def cart_submit(req):
     """Сабмит заказа"""
-    form = CartSubmitOrder(req.POST)
-    # if not form.is_valid():
-    #     return HttpResponse(status=500)
-
-    config = get_config()
-    cart = Cart(req)
-
-    customer = Customer.objects.get_or_create(
-        contact_name=form.data['contact_name'],
-        contact_type=form.data['contact_type'],
-        contact_data=form.data['contact_data']
-    )
-    customer = customer[0] # При get_or_create вернет tuple (obj, bool)
-
-    order = Order.objects.create(
-        customer=customer,
-        total_price=cart.get_total_price()
-    )
-    order.products.set(cart.get_cart_products()) # Для manyToManyField используем SET
-    order.save()
-
-    text_content = ''
-    for pid, val in cart.cart.items():
-        # product = Product.objects.get_object_or_404(id=int(pid))
-        text_content += 'Товар: <a href="' + reverse("shop:product", args=pid) + '">Продукт</a> | '
-        text_content += f'Количество: {val["quantity"]} | Цена за еденицу: {val["price"]} \n'
-    text_content += f'Покупатель {customer.contact_name} | Cпособ связи: {config["contactTypeList"][customer.contact_type]}: {customer.contact_data} \n'
-    # text_content += 'Заказ: <a href="' + reverse("order:OrderView")
-
-    html_content = render_to_string('order-mail.html', {
-        'cart': cart,
-        'contact_name': customer.contact_name,
-        'contact_type': config["contactTypeList"][customer.contact_type],
-        'contact_data': customer.contact_data,
-        'product_link': config['schema'] + config['host'] + '/product/',
-        # 'order_link': config['schema'] + config['host'] + reverse("order:OrderView"),
-    })
-
-    subject, from_email, to = f'Заказ на {config["companyName"]}', '', 'lutogin@gmail.com'
-    email = EmailMultiAlternatives(subject, text_content, to=[to])
-    email.attach_alternative(html_content, "text/html")
-    email.send()
-
-    cart.clear()
-
-    return render(req, 'order-completed.html', context={'title': 'Заказ успешно получен!'})
+    return CartService.cart_submit(req)

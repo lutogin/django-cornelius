@@ -10,7 +10,7 @@
       {% with product=item.product %}
         <tr id="product-{{ product.id }}" class="product-cart-item">
           <td>
-            <a href="{{ product_link }}{{ product.id }}">{{ product.title }}</a>
+            <a href="{{ product_url }}{{ product.id }}">{{ product.title }}</a>
           </td>
           <td>
             <span>Количество: {{ item.quantity }}</span>
@@ -33,7 +33,7 @@
     <p>{{ contact_type }}: {{ contact_data }}</p>
   </div>
   <div>
-{#    <p><a href="{{ order_link }}">Заказ</a></p>#}
+    <p><a href="{{ order_link }}">Заказ</a></p>
   </div>
 </body>
 </html>
