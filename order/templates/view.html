@@ -4,21 +4,57 @@
   <meta charset="UTF-8">
   <title>Заказ</title>
 </head>
+<style>
+  body {
+    font-family: ProximaNova,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+    font-weight: 300;
+    color: #222
+  }
+  .content {
+    width: 610px;
+    display: block;
+    margin: 0 auto;
+    padding: 55px;
+  }
+  .green {
+    color: green;
+  }
+  .red {
+    color: darkred;
+  }
+  .yellow {
+    color: mediumblue;
+  }
+</style>
 <body>
-  <p>Заказа# {{ order.id }}</p>
-  <p>Заказчик: {{ order.customer.contact_name }}, {{ order.customer.contact_type }}: {{ order.customer.contact_data }}</p>
+<div class="content">
+  <p>Заказ #{{ order.id }}</p>
+  <p>Заказчик: {{ order.customer.contact_name }}, {{ contact_type }}: {{ order.customer.contact_data }}</p>
   <table>
     <thead>
       <tr>
-        <td>Товар</td>
+        <td>Товар(ы):</td>
       </tr>
     </thead>
-    {% for product in order.products %}
+    {% for product in order.products.all %}
       <tr>
-        <td>{{ product.title }}</td>
+        <td><a href="/product/{{ product.id}}" target="_blank">{{ product.title }}</a> - {{ product.price }}р.</td>
       </tr>
     {% endfor %}
   </table>
   <p>Предварительная сумма заказа: {{ order.total_price }}р.</p>
+  {% if order.status == 'pending' %}
+    <h4 class="yellow">Ордер в работе.</h4>
+    <div>
+      <span><a href="{{ host }}/order/{{ order.id }}/done">Заказ выполнен</a></span>
+      <span> | </span>
+      <span><a href="{{ host }}/order/{{ order.id }}/cancel">Отмена заказа</a></span>
+    </div>
+  {% elif order.status == 'cancel' %}
+    <h4 class="red">Ордер отменен.</h4>
+  {% elif order.status == 'done' %}
+    <h4 class="green">Ордер выполнен.</h4>
+  {% endif %}
+</div>
 </body>
 </html>

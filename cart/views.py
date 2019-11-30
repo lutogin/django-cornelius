@@ -1,19 +1,9 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.views.decorators.http import require_POST
 from django.http import HttpResponse
-from django.urls import reverse
-from django.core.mail import EmailMessage
-from django.core.mail import EmailMultiAlternatives
-from django.template.loader import render_to_string
-from django.conf import settings
-
-from core.get_config import get_config
 
 from shop.models import Product
-from customer.models import Customer
-from order.models import Order
 from cart.cart import Cart
-from cart.forms import CartSubmitOrder
 from cart.service import CartService
 
 import json
