@@ -1,3 +1,5 @@
+const HOST = 'http://127.0.0.1:8000';
+
 /**
  * Возвращает значение cookie по ключу.
  *
@@ -26,7 +28,7 @@ function getCookie(name) {
  * @param {string} cart_event   Тип события(add/rm)
  * @param {string} p_id         ID продукта.
  */
-function cartRequest(cart_event, p_id) {
+async function cartRequest(cart_event, p_id) {
   const ADD_TO_CARD = 'add';
   const DEL_FROM_CARD = 'rm';
 
@@ -45,47 +47,48 @@ function cartRequest(cart_event, p_id) {
     'add': '<i class="fas fa-shopping-cart"></i><span>&nbsp;Товар добавлен</span>',
     'rm': '<i class="fas fa-backspace"></i><span>&nbsp;Товар удален</span>'
   };
-  //@todo адрес брать с конфига
-  fetch(`http://127.0.0.1:8000/cart/${url[cart_event]}/${p_id}/`, {
+
+  try {
+    const res = await fetch(`${HOST}/cart/${url[cart_event]}/${p_id}/`, {
     method: 'POST',
     headers: {
       'X-CSRFToken': getCookie('csrftoken'),
     },
-  })
-    .then((res) => res.json())
-    .then((data) => {
-      cart_counter = document.querySelector('.header_cart__counter');
+  });
+  const data = await res.json();
+  const cart_counter = document.querySelector('.header_cart__counter');
+    switch (cart_event) {
+      case ADD_TO_CARD:
+        cart_counter.innerText = data.counter;
+        if(!cart_counter.classList.contains('active')) {
+          cart_counter.classList.add('active');
+        }
+        break;
 
-      switch (cart_event) {
-        case ADD_TO_CARD:
+      case DEL_FROM_CARD:
+        document.querySelector(`#product-${p_id}`).remove();
+        if(+data.counter > 0) {
           cart_counter.innerText = data.counter;
-          if(!cart_counter.classList.contains('active')) {
-            cart_counter.classList.add('active');
-          }
-          break;
+        } else {
+          cart_counter.classList.remove('active');
+          cart_counter.innerText = 0;
+        }
 
-        case DEL_FROM_CARD:
-          document.querySelector(`#product-${p_id}`).remove();
-          if(+data.counter > 0) {
-            cart_counter.innerText = data.counter;
-          } else {
-            cart_counter.classList.remove('active');
-            cart_counter.innerText = 0;
-          }
+        calculateTotalPrice();
+        break;
+    }
 
-          calculateTotalPrice();
-          break;
-      } // end swith
+    UIkit.notification({
+      message: msg[cart_event],
+      status: 'primary',
+      pos: 'bottom-right',
+      timeout: 3000,
+    });
+  } catch (e) {
+    console.error(e);
+  }
 
-      UIkit.notification({
-        message: msg[cart_event],
-        status: 'primary',
-        pos: 'bottom-right',
-        timeout: 3000,
-      });
 
-    })
-    .catch(err => console.error(err));
 }
 
 /**

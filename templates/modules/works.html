@@ -17,8 +17,8 @@
               <img class="full-width img-responsive" src="{{ work.img }}" alt="Portfolio Image">
             </div>
             <div class="work-content">
-              <h3 class="color-white margin-b-5">{{ work.title }}</h3>
-              <p class="color-white margin-b-0">{{ work.description }}</p>
+              <h3 class="color-white margin-b-5">{{ work.product.title }}</h3>
+              <p class="color-white margin-b-0">{{ work.product.description }}</p>
             </div>
             <a class="content-wrapper-link" href="{% url 'shop:product' work.product.id %}"></a>
           </div>

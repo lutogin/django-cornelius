@@ -74,16 +74,16 @@ def get_cart_api(req):
 def cart_submit(req):
     """Сабмит заказа"""
     form = CartSubmitOrder(req.POST)
-    if not form.is_valid():
-        return HttpResponse(status=500)
+    # if not form.is_valid():
+    #     return HttpResponse(status=500)
 
     config = get_config()
     cart = Cart(req)
 
     customer = Customer.objects.get_or_create(
-        contact_name=form.cleaned_data['contact_name'],
-        contact_type=form.cleaned_data['contact_type'],
-        contact_data=form.cleaned_data['contact_data']
+        contact_name=form.data['contact_name'],
+        contact_type=form.data['contact_type'],
+        contact_data=form.data['contact_data']
     )
     customer = customer[0] # При get_or_create вернет tuple (obj, bool)
 
@@ -100,7 +100,7 @@ def cart_submit(req):
         text_content += 'Товар: <a href="' + reverse("shop:product", args=pid) + '">Продукт</a> | '
         text_content += f'Количество: {val["quantity"]} | Цена за еденицу: {val["price"]} \n'
     text_content += f'Покупатель {customer.contact_name} | Cпособ связи: {config["contactTypeList"][customer.contact_type]}: {customer.contact_data} \n'
-    text_content += 'Заказ: <a href="' + reverse("order:OrderView")
+    # text_content += 'Заказ: <a href="' + reverse("order:OrderView")
 
     html_content = render_to_string('order-mail.html', {
         'cart': cart,
