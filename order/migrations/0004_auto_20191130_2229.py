@@ -6,18 +6,18 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('order', '0004_auto_20191007_2252'),
+        ('order', '0003_auto_20190928_1901'),
     ]
 
     operations = [
         migrations.AddField(
             model_name='order',
-            name='close_date',
+            name='due_date',
             field=models.DateField(null=True, blank=True),
         ),
         migrations.AddField(
             model_name='order',
-            name='order_status',
+            name='status',
             field=models.CharField(choices=[('pending', 'В работе'), ('done', 'Выполнен'), ('cancel', 'Отменен')], default='pending', max_length=255, verbose_name='Статус выполнения ордера'),
         ),
     ]

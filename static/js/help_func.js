@@ -1,4 +1,4 @@
-const HOST = 'http://127.0.0.1:8000';
+const HOST = 'http://0.0.0.0:8000';
 
 /**
  * Возвращает значение cookie по ключу.
@@ -33,7 +33,7 @@ async function cartRequest(cart_event, p_id) {
   const DEL_FROM_CARD = 'rm';
 
   if (cart_event !== ADD_TO_CARD && cart_event !== DEL_FROM_CARD) {
-    console.error(`Wrong cart event! (${cart_event})`);
+    alert(`Wrong cart event! (${cart_event})`);
     return;
   }
 

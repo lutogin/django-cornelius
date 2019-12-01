@@ -2,6 +2,7 @@
 
 from django.db import migrations, models
 import django.db.models.deletion
+import uuid
 
 
 class Migration(migrations.Migration):
@@ -17,7 +18,7 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='Order',
             fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
+                ('id', models.UUIDField(default=uuid.uuid4, help_text='Уникальный идентификатор ордера', primary_key=True, serialize=False)),
                 ('total_price', models.IntegerField(verbose_name='Предварительная сумма заказа')),
                 ('customer', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='customer', to='customer.Customer', verbose_name='Покупатель')),
                 ('products', models.ManyToManyField(related_name='products', to='shop.Product', verbose_name='Заказ')),

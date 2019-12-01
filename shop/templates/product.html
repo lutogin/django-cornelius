@@ -1,10 +1,6 @@
 {% extends 'base.html' %}
 {% load static %}
 
-{% block csfr %}
-  {% csrf_token %}
-{% endblock %}
-
 {% block title_content %}
   {{ title }}
 {% endblock %}
@@ -29,6 +25,7 @@
         <p>{{ product.description }}</p>
       </div>
       <div class="col-sm-6">
+        {% csrf_token %}
         <button class="uk-button uk-button-primary uk-button-large pull-right"
                 onclick="cartRequest('add', '{{ product.id  }}'); return !1;">Добавить в корзину
         </button>

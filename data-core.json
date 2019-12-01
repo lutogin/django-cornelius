@@ -1,0 +1,1 @@
+[{"model": "core.user", "pk": 1, "fields": {"password": "pbkdf2_sha256$150000$M0DlYySHQE4B$6QlqylWHtWazUvGnnWfb8aTkcSRlQm70+Lxlk9DKIQY=", "last_login": "2019-11-30T15:34:28.138Z", "is_superuser": true, "email": "lutogin@gmail.com", "name": "", "is_active": true, "is_staff": true, "groups": [], "user_permissions": []}}]
