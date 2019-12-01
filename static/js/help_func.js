@@ -1,5 +1,3 @@
-const HOST = 'http://0.0.0.0:8000';
-
 /**
  * Возвращает значение cookie по ключу.
  *
@@ -49,7 +47,7 @@ async function cartRequest(cart_event, p_id) {
   };
 
   try {
-    const res = await fetch(`${HOST}/cart/${url[cart_event]}/${p_id}/`, {
+    const res = await fetch(`${HOST_URL}/cart/${url[cart_event]}/${p_id}/`, {
     method: 'POST',
     headers: {
       'X-CSRFToken': getCookie('csrftoken'),

@@ -2,7 +2,6 @@
  * Цена гравировки.
  * @type {number}
  */
-const ENGRAVING_PRICE = 500;
 const ORDER_FORM = document.querySelector('#confirm-order-form');
 const CART_FORM = document.querySelector('#make-order-form');
 const CART_FORM_BTN = document.querySelector('#make-order-btn');
@@ -60,7 +59,7 @@ function submitRequest(contactName, contactType, contactData) {
     'contactData': contactData
   };
 
-  return fetch('http://127.0.0.1:8000/cart/submit/', {
+  return fetch(`${HOST_URL}/cart/submit/`, {
     method: 'POST',
     headers: {
       'X-CSRFToken': getCookie('csrftoken'),
@@ -139,7 +138,7 @@ CART_FORM_BTN.addEventListener('click', (evt) => {
     }
   }
 
-  fetch('http://127.0.0.1:8000/cart/update/', {
+  fetch(`${HOST_URL}/cart/update/`, {
     method: 'POST',
     headers: {
       'X-CSRFToken': getCookie('csrftoken'),

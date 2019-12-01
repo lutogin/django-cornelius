@@ -3,6 +3,7 @@ from django.core.mail import EmailMultiAlternatives
 from django.template.loader import render_to_string
 from django.conf import settings
 from django.shortcuts import render, redirect, get_object_or_404
+from django.core.exceptions import ObjectDoesNotExist
 
 from customer.models import Customer
 from order.models import Order
@@ -23,12 +24,14 @@ class CartService:
         config = get_config()
         cart = Cart(req)
 
-        customer = Customer.objects.get_or_create(
-            contact_name=form.data['contact_name'],
-            contact_type=form.data['contact_type'],
-            contact_data=form.data['contact_data']
-        )
-        customer = customer[0]  # При get_or_create вернет tuple (obj, bool)
+        try:
+            customer = Customer.objects.get(contact_data=form.data['contact_data'])
+        except ObjectDoesNotExist:
+            customer = Customer.objects.create(
+                contact_name=form.data['contact_name'],
+                contact_type=form.data['contact_type'],
+                contact_data=form.data['contact_data']
+            )
 
         order = Order.objects.create(
             customer=customer,

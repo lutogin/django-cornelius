@@ -27,7 +27,8 @@
 
   <!--========== CART ==========-->
   {% if cart %}
-    <script src="{% static '/js/pages/shoping-cart.js' %}" defer></script>
+    <script src="{% static '/js/cart/shoping-cart.js' %}" defer></script>
+    <script src="{% static '/js/cart/validation.js' %}" defer></script>
     <div class="content-lg container">
       <div class="row margin-b-40">
         <div class="col-sm-12">
@@ -71,7 +72,7 @@
                                      name="engr-product-{{ product.id }}"
                                      onchange="addEngraving('{{ product.id }}')"
                                      {% if item.engraving %}checked{% endif %}>
-                              Выполнить гравировку
+                              С гравировкой
                             </label>
                           </td>
                           <td>
@@ -95,7 +96,9 @@
                       </tfooter>
                   </table>
                   <div class="uk-flex uk-flex-around">
-                    <button type="submit" id="make-order-btn" class="uk-button uk-button-primary request" uk-toggle="target: #modal-request-buy">Оставить заявку</button>
+                    <button type="submit" id="make-order-btn" class="uk-button uk-button-default request" uk-toggle="target: #modal-request-buy">
+                      Оставить заявку
+                    </button>
                   </div>
                 </form>
               </div>
@@ -114,7 +117,7 @@
     <div id="modal-request-buy" uk-modal>
       <div class="uk-modal-dialog uk-modal-body">
         <h2 class="uk-modal-title">Оставьте контактные данные для связи</h2>
-        <form action="{% url 'cart:CartSubmit' %}" method="post" class="request-from" id="confirm-order-form">
+        <form action="{% url 'cart:CartSubmit' %}" method="post" class="request-from validation" id="confirm-order-form">
           {% csrf_token %}
           {{ submit_order_form }}
 {#          <label for="contactName">Ваше имя</label>#}
@@ -130,7 +133,7 @@
 
           <p class="uk-text-right uk-margin-top">
             <button class="uk-button uk-button-default uk-modal-close" type="button">Отмена</button>
-            <button id="request-btn-submit" class="uk-button uk-button-primary" type="submit">Отправить</button>
+            <button id="request-btn-submit" class="uk-button uk-button-secondary" type="submit" disabled="disabled">Отправить</button>
           </p>
         </form>
       </div>
