@@ -18,7 +18,11 @@ class CategoryAdmin(admin.ModelAdmin):
     list_display = ['name', 'slug']
 
 
-admin.site.register(MainSlider)
+@admin.register(MainSlider)
+class MainSliderAdmin(admin.ModelAdmin):
+    list_display = ['title', 'img', 'description']
+
+
 admin.site.register(Review)
 admin.site.register(OurClients)
 admin.site.register(OurWorks)

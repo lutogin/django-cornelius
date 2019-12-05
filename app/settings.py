@@ -170,17 +170,14 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/2.2/howto/static-files/
 
 STATIC_URL = '/static/'
-STATIC_ROOT = 'static_files'
+STATIC_ROOT = os.path.join(BASE_DIR, "static_files")
 # все что в адресе site.loc/static будет иметь путь к STATIC_ROOT(/vol/web/static)
 MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 # все что в адресе site.loc/media будет иметь путь к MEDIA_ROOT(/vol/web/media)
-# STATIC_ROOT = 'static'
-MEDIA_ROOT = 'media'
 
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'static'),
-    os.path.join(BASE_DIR, 'media', 'static'),
-    # '/var/www/static/',
 ]
 
 AUTH_USER_MODEL = 'core.User'
