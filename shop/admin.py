@@ -23,6 +23,17 @@ class MainSliderAdmin(admin.ModelAdmin):
     list_display = ['title', 'img', 'description']
 
 
-admin.site.register(Review)
-admin.site.register(OurClients)
-admin.site.register(OurWorks)
+@admin.register(OurClients)
+class OurClientsAdmin(admin.ModelAdmin):
+    list_display = ['title', 'img', 'link']
+
+
+@admin.register(OurWorks)
+class OurWorksAdmin(admin.ModelAdmin):
+    list_display = ['product', 'img', 'large_img']
+
+
+@admin.register(Review)
+class ReviewAdmin(admin.ModelAdmin):
+    list_display = ['fio', 'soc_link', 'review_text']
+

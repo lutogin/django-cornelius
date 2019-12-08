@@ -146,6 +146,7 @@ class MainSlider(models.Model):
 class Review(models.Model):
     """Модель отзывов."""
     fio = models.CharField(max_length=255, verbose_name='ФИО')
+    soc_link = models.CharField(max_length=255, blank=True, verbose_name='Ссылка')
     position = models.CharField(max_length=255, blank=True, verbose_name='Должность')
     review_text = models.TextField(verbose_name='Отзыв')
 
@@ -164,6 +165,9 @@ class OurClients(models.Model):
         verbose_name = 'Наш клиент'
         verbose_name_plural = 'Нашы клиенты'
 
+    def __str__(self):
+        return self.title
+
 
 class OurWorks(models.Model):
     """Модель наших работ"""
@@ -175,3 +179,5 @@ class OurWorks(models.Model):
         verbose_name = 'Наша работа'
         verbose_name_plural = 'Нашы работы'
 
+    def __str__(self):
+        return self.product.title
