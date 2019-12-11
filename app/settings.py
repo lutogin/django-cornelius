@@ -4,7 +4,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 SECRET_KEY = 'cin2c^lk79t6p$msc^f(lp1o2lp@9n4u!5odr(_h2hor*dqnrc'
 
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = [
     '127.0.0.1',
@@ -41,7 +41,6 @@ MIDDLEWARE = [
 ]
 
 ROOT_URLCONF = 'app.urls'
-
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
@@ -59,7 +58,8 @@ TEMPLATES = [
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
                 'cart.context_processors.cart',
-                'core.context_processors.config'
+                'core.context_processors.config',
+                'django.template.context_processors.media'
             ],
         },
     },
@@ -128,11 +128,9 @@ USE_L10N = True
 USE_TZ = True
 
 STATIC_URL = '/static/'
-STATIC_ROOT = os.path.join(BASE_DIR, "static_files")
-# все что в адресе site.loc/static будет иметь путь к STATIC_ROOT(/vol/web/static)
+STATIC_ROOT = os.path.join(BASE_DIR, 'static_files')
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
-# все что в адресе site.loc/media будет иметь путь к MEDIA_ROOT(/vol/web/media)
 
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'static'),
