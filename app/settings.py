@@ -27,11 +27,12 @@ DEBUG = True
 
 ALLOWED_HOSTS = [
     '127.0.0.1',
-    '0.0.0.0'
+    '0.0.0.0',
+    '167.172.182.37'
 ]
 SCHEMA = 'http'
-M_HOST = '127.0.0.1:8000'
-MAIN_HOST = 'http://0.0.0.0:8000'
+M_HOST = '167.172.182.37:8000'
+MAIN_HOST = 'http://167.172.182.37:8000'
 
 
 # Application definition
@@ -99,10 +100,11 @@ DATABASES = {
     # }
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'HOST': os.environ.get('DB_HOST'),
-        'NAME': os.environ.get('DB_NAME'),
-        'USER': os.environ.get('DB_USER'),
-        'PASSWORD': os.environ.get('DB_PASS'),
+        'HOST': '',
+	'PORT': '',
+        'NAME': 'cornelius',
+        'USER': 'cornelius_db',
+        'PASSWORD': 'Qz314159',
     }
 }
 
