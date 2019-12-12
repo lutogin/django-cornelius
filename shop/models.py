@@ -66,8 +66,8 @@ class Photo(models.Model):
 
         img = Image.open(self.image.path)  # Open image using self
 
-        if img.height > 2560 or img.width > 1440:
-            new_img = (1920, 1080)
+        if img.height > 3840 or img.width > 2160:
+            new_img = (2560, 1440)
             img.thumbnail(new_img)
             img.save(self.image.path)  # saving image at the same path
 
