@@ -85,8 +85,8 @@ EMAIL_PORT = 587
 EMAIL_HOST_USER = 'hekto.v8@gmail.com'
 EMAIL_HOST_PASSWORD = 'Qz314159'
 
-EMAIL_CORNELIUS = 'lutogin@gmail.com'
-EMAIL_ADMIN = 'lutogin+admin@gmail.com'
+EMAIL_CORNELIUS = 'handmadecornelius@gmail.com'
+EMAIL_ADMIN = 'lutogin+cornelius@gmail.com'
 
 RECAPTCHA_PUBLIC_KEY = '6LdsyroUAAAAAAR278Z5cZECjTqH25FtYJbIJ0Ju'
 RECAPTCHA_PRIVATE_KEY = '6LdsyroUAAAAACJDwqEzAIfzzkxw9T0O_0rQ9RFf'
