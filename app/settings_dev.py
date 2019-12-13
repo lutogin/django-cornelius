@@ -4,7 +4,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 SECRET_KEY = 'cin2c^lk79t6p$msc^f(lp1o2lp@9n4u!5odr(_h2hor*dqnrc'
 
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = [
     '127.0.0.1',
@@ -107,18 +107,18 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-CACHES = {
-   'default': {
-      'BACKEND': 'django.core.cache.backends.filebased.FileBasedCache',
-      'LOCATION': os.path.join(BASE_DIR, 'django_cache'),
-   }
-}
-
-MIDDLEWARE += [
-   'django.middleware.cache.UpdateCacheMiddleware',
-   'django.middleware.common.CommonMiddleware',
-   'django.middleware.cache.FetchFromCacheMiddleware',
-]
+# CACHES = {
+#    'default': {
+#       'BACKEND': 'django.core.cache.backends.filebased.FileBasedCache',
+#       'LOCATION': os.path.join(BASE_DIR, 'django_cache'),
+#    }
+# }
+#
+# MIDDLEWARE += [
+#    'django.middleware.cache.UpdateCacheMiddleware',
+#    'django.middleware.common.CommonMiddleware',
+#    'django.middleware.cache.FetchFromCacheMiddleware',
+# ]
 
 LANGUAGE_CODE = 'ru-ru'
 TIME_ZONE = 'Europe/Moscow'
