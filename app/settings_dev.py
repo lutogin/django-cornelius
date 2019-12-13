@@ -8,11 +8,12 @@ DEBUG = False
 
 ALLOWED_HOSTS = [
     '127.0.0.1',
+    '0.0.0.0',
     '167.172.182.37'
 ]
 SCHEMA = 'http'
-M_HOST = '167.172.182.37:8001'
-MAIN_HOST = 'http://167.172.182.37:8001'
+M_HOST = '0.0.0.0:8000'
+MAIN_HOST = 'http://0.0.0.0:8000'
 
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -69,11 +70,10 @@ WSGI_APPLICATION = 'app.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'HOST': '',
-        'PORT': '',
-        'NAME': 'cornelius',
-        'USER': 'cornelius_db',
-        'PASSWORD': 'Qz314159',
+        'HOST': os.environ.get('DB_HOST'),
+        'NAME': os.environ.get('DB_NAME'),
+        'USER': os.environ.get('DB_USER'),
+        'PASSWORD': os.environ.get('DB_PASS'),
     }
 }
 
