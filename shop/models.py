@@ -103,7 +103,6 @@ class Product(models.Model):
         ('bag', 'Сумка'),
         ('belt', 'Ремень'),
         ('cover', 'Обложка'),
-        ('engraving', 'Гравировка'),
         ('housekeeper', 'Ключница'),
         ('portmone', 'Портмоне'),
         ('purse', 'Кошелек'),
@@ -130,6 +129,23 @@ class Product(models.Model):
 
     def __str__(self):
         return f'{self.title} - id{self.id}'
+
+
+class Engraving(models.Model):
+    """Модель гравровки."""
+    title = models.CharField(max_length=255, verbose_name='Титл гравировки', blank=True)
+    price = models.IntegerField(verbose_name='Цена')
+    available = models.BooleanField(verbose_name='Наличие товара', default=True)
+    imgs = models.ManyToManyField(Photo, verbose_name='Фото товара', related_name='engraving_imgs')
+    created_date = models.DateTimeField(auto_now_add=True, blank=True)
+
+    class Meta:
+        ordering = ['title', '-created_date']
+        verbose_name = 'Гравировка'
+        verbose_name_plural = 'Гравировки'
+
+    def __str__(self):
+        return f'{self.title} - {self.imgs}'
 
 
 class MainSlider(models.Model):

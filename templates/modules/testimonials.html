@@ -13,7 +13,9 @@
                 <div class="margin-b-20">
                   {{ review.review_text }}
                 </div>
-                <p><span class="fweight-700 color-link">{{ review.fio }}</span>, {{ review.position }}</p>
+                <p><a href="{{ review.link }}">
+                  <span class="fweight-700 color-link">{{ review.fio }}</span>
+                </a>, {{ review.position }}</p>
               </blockquote>
             </div>
           {% endfor %}

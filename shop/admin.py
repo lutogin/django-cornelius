@@ -37,3 +37,9 @@ class OurWorksAdmin(admin.ModelAdmin):
 class ReviewAdmin(admin.ModelAdmin):
     list_display = ['fio', 'soc_link', 'review_text']
 
+
+@admin.register(Engraving)
+class ReviewAdmin(admin.ModelAdmin):
+    list_display = ['title']
+
+
