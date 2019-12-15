@@ -13,6 +13,5 @@
 
 .carousel-centered {
     padding: 55px 21% 55px 13%;
-    /*background-color: rgba(0, 0, 0, 0.5);*/
     background-image: linear-gradient(to right, rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.0));
 }
