@@ -7,4 +7,5 @@ __pycache__/
 venv/
 media
 django_cache/
+static_files/
 manage.py

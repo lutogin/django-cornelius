@@ -448,6 +448,7 @@ h3, h4 {
 }
 
 .header .navbar {
+    background-color: rgba(0, 0, 0, 0.5);
     margin-bottom: 0;
     transition-duration: .3s;
     transition-property: all;
@@ -878,7 +879,8 @@ h3, h4 {
 
 .carousel-centered {
     position: absolute;
-    top: 50%;
+    top: 70%;
+    left: 0px;
     -webkit-transform: translate3d(0, -50%, 0);
     -moz-transform: translate3d(0, -50%, 0);
     transform: translate3d(0, -50%, 0)
