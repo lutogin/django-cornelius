@@ -10,7 +10,7 @@ ALLOWED_HOSTS = [
     '127.0.0.1',
     '167.172.182.37'
 ]
-SCHEMA = 'http'
+SCHEMA = 'https'
 M_HOST = '167.172.182.37:8001'
 MAIN_HOST = 'http://167.172.182.37:8001'
 
