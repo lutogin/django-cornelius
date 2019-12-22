@@ -39,7 +39,7 @@ class ReviewAdmin(admin.ModelAdmin):
 
 
 @admin.register(Engraving)
-class ReviewAdmin(admin.ModelAdmin):
+class EngravingAdmin(admin.ModelAdmin):
     list_display = ['title']
 
 

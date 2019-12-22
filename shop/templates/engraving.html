@@ -21,19 +21,21 @@
   <div class="content-lg container">
     <div class="row margin-b-40">
       <div class="col-sm-6">
-        <h2>{{ product.title }} - {{ product.price }}р.</h2>
-        <p>{{ product.description }}</p>
+        <h1>Гравировки</h1>
       </div>
     </div>
 
     <div uk-lightbox class="row margin-b-50">
-      {% for img in engraving_obj.imgs.all %}
+      {% for engraving in engravings %}
         <div class="col-sm-4 sm-margin-b-50">
           <div class="margin-b-20">
             <div class="wow zoomIn" data-wow-duration=".3" data-wow-delay=".1s">
-              <a class="uk-button" href="{{ img }}"><img class="img-responsive uk-card-hover" src="{{ img }}" alt="Img"></a>
+              <a class="uk-button" href="{{ engraving.imgs }}">
+                <img class="img-responsive uk-card-hover" src="{{ engraving.imgs }}" alt="Img">
+              </a>
             </div>
           </div>
+          <p class="text-center">Цена ~ {{ engraving.price }} р.</p>
         </div>
       {% endfor %}
     </div>

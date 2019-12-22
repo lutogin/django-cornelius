@@ -136,11 +136,11 @@ class Engraving(models.Model):
     title = models.CharField(max_length=255, verbose_name='Титл гравировки', blank=True)
     price = models.IntegerField(verbose_name='Цена')
     available = models.BooleanField(verbose_name='Наличие товара', default=True)
-    imgs = models.ManyToManyField(Photo, verbose_name='Фото товара', related_name='engraving_imgs')
+    imgs = models.OneToOneField(Photo, verbose_name='Фото товара', on_delete=models.CASCADE)
     created_date = models.DateTimeField(auto_now_add=True, blank=True)
 
     class Meta:
-        ordering = ['title', '-created_date']
+        ordering = ['title']
         verbose_name = 'Гравировка'
         verbose_name_plural = 'Гравировки'
 

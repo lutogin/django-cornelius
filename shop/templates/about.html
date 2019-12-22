@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block body %}
+  <!--========== PARALLAX ==========-->
+  <div class="uk-height-medium uk-background-cover uk-light uk-flex" uk-parallax="bgy: -300"
+       style='background-image: url({% static "/img/1920x1080/01.jpg" %});'>
+    <h1 class="uk-width-1-2@m uk-text-center uk-margin-auto uk-margin-auto-vertical">{{ title }}</h1>
+  </div>
+  <!--========== PARALLAX ==========-->
+
+  <!--========== PAGE LAYOUT ==========-->
+  <div class="content-lg container">
+    <div class="row margin-b-40">
+      <div class="col-sm-6">
+        <h1>История Cornelius</h1>
+        <p></p>
+      </div>
+    </div>
+
+    <div class="row margin-b-50">
+
+      <div class="col-sm-6 sm-margin-b-50">
+        <div class="margin-b-20 ">
+          <span>The working process.</span>
+          <iframe width="560" height="315" src="https://www.youtube.com/embed/3749_pHaAPg" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        </div>
+      </div>
+
+      <div class="col-sm-6 sm-margin-b-50">
+        <div class="margin-b-20 ">
+          <span>The working process.</span>
+          <iframe width="560" height="315" src="https://www.youtube.com/embed/E2CcBDLYwsA" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        </div>
+      </div>
+    </div>
+
+  </div>
+  <!--========== END PAGE LAYOUT ==========-->
+{% endblock %}

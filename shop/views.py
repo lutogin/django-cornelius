@@ -49,10 +49,15 @@ def product_detail(req, p_id: int):
     })
 
 
-def engraving(req):
-    engraving_obj = Product.objects.filter(type__slug='engraving')
-
+def engravings_page(req):
+    """Страница гравировок"""
     return render(req, 'engraving.html', context={
         'title': 'Примеры выполнения гравировок',
-        'engraving': engraving_obj
+        'engravings': Engraving.objects.all()
     })
+
+
+def about_page(req):
+    """Страница О нас"""
+    return render(req, 'about.html')
+
