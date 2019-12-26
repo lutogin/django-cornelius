@@ -4,8 +4,8 @@ from shop.models import *
 
 @admin.register(Product)
 class ProductAdmin(admin.ModelAdmin):
-    list_display = ['title', 'price', 'available']
-    list_filter = ['title', 'available']
+    list_display = ['title', 'price', 'available', 'created_date']
+    list_filter = ['created_date']
 
 
 @admin.register(Photo)

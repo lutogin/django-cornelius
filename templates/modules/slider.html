@@ -1,3 +1,4 @@
+{% load webp_converter %}
 <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
   <div class="container">
     <!-- Indicators -->
@@ -15,7 +16,7 @@
   <div class="carousel-inner" role="listbox">
     {% for slide in slider %}
       <div class="item">
-        <img class="img-responsive" src="/media/{{ slide.img }}" alt="Slider Image">
+        <img class="img-responsive" src="{% static_webp '..'|add:slide.img.url %}" alt="Slider Image">
         <div class="container">
           <div class="carousel-centered">
             <div class="margin-b-40">

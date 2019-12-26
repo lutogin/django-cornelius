@@ -22,6 +22,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'webp_converter',
     'captcha',
     'core',
     'shop',
@@ -59,7 +60,8 @@ TEMPLATES = [
                 'django.contrib.messages.context_processors.messages',
                 'cart.context_processors.cart',
                 'core.context_processors.config',
-                'django.template.context_processors.media'
+                'django.template.context_processors.media',
+                'webp_converter.context_processors.webp_support',
             ],
         },
     },
@@ -69,6 +71,8 @@ WSGI_APPLICATION = 'app.wsgi.application'
 
 DATABASES = {
     'default': {
+        # 'ENGINE': 'django.db.backends.sqlite3',
+        # 'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
         'ENGINE': 'django.db.backends.postgresql',
         'HOST': os.environ.get('DB_HOST'),
         'NAME': os.environ.get('DB_NAME'),
@@ -120,7 +124,7 @@ AUTH_PASSWORD_VALIDATORS = [
 #    'django.middleware.cache.FetchFromCacheMiddleware',
 # ]
 
-LANGUAGE_CODE = 'ru-ru'
+LANGUAGE_CODE = 'RU-ru'
 TIME_ZONE = 'Europe/Moscow'
 USE_I18N = True
 USE_L10N = True
@@ -132,6 +136,7 @@ MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, 'media'),
     os.path.join(BASE_DIR, 'static'),
 ]
 
@@ -140,3 +145,10 @@ AUTH_USER_MODEL = 'core.User'
 CART_SESSION_ID = 'cart'
 
 PYTHONHTTPSVERIFY = 0
+
+DJANGORESIZED_DEFAULT_SIZE = [1600, 960]
+DJANGORESIZED_DEFAULT_QUALITY = 70
+DJANGORESIZED_DEFAULT_KEEP_META = False
+DJANGORESIZED_DEFAULT_FORCE_FORMAT = 'JPEG'
+DJANGORESIZED_DEFAULT_FORMAT_EXTENSIONS = {'JPEG': ".jpg"}
+DJANGORESIZED_DEFAULT_NORMALIZE_ROTATION = True

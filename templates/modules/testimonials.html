@@ -1,32 +1,34 @@
-<div class="content-lg container">
-  <div class="row">
-    <div class="col-sm-9">
-      <h2>Отзывы о нашей работе</h2>
+<div class="bg-color-sky-light">
+  <div class="content-lg container">
+    <div class="row">
+      <div class="col-sm-9">
+        <h2>Отзывы о нашей работе</h2>
 
-      <!-- Swiper Testimonials -->
-      <div class="swiper-slider swiper-testimonials">
-        <!-- Swiper Wrapper -->
-        <div class="swiper-wrapper">
-          {% for review in reviews %}
-            <div class="swiper-slide">
-              <blockquote class="blockquote">
-                <div class="margin-b-20">
-                  {{ review.review_text }}
-                </div>
-                <p><a href="{{ review.link }}">
-                  <span class="fweight-700 color-link">{{ review.fio }}</span>
-                </a>, {{ review.position }}</p>
-              </blockquote>
-            </div>
-          {% endfor %}
+        <!-- Swiper Testimonials -->
+        <div class="swiper-slider swiper-testimonials">
+          <!-- Swiper Wrapper -->
+          <div class="swiper-wrapper">
+            {% for review in reviews %}
+              <div class="swiper-slide">
+                <blockquote class="blockquote">
+                  <div class="margin-b-20">
+                    {{ review.review_text }}
+                  </div>
+                  <p><a href="{{ review.link }}">
+                    <span class="fweight-700 color-link">{{ review.fio }}</span>
+                  </a>, {{ review.position }}</p>
+                </blockquote>
+              </div>
+            {% endfor %}
+          </div>
+          <!-- End Swiper Wrapper -->
+
+          <!-- Pagination -->
+          <div class="swiper-testimonials-pagination"></div>
         </div>
-        <!-- End Swiper Wrapper -->
-
-        <!-- Pagination -->
-        <div class="swiper-testimonials-pagination"></div>
+        <!-- End Swiper Testimonials -->
       </div>
-      <!-- End Swiper Testimonials -->
     </div>
+    <!--// end row -->
   </div>
-  <!--// end row -->
 </div>

@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 
 {% load static %}
-
+{% load webp_converter %}
 {% block additional_css %}
 {#  <link href="{% static '/lib/admin/fontawesome-free/css/all.min.css' %}" rel="stylesheet" type="text/css">#}
   <link href="{% static '/css/for-page/cart.css' %}" rel="stylesheet" type="text/css">
@@ -21,7 +21,7 @@
 {#    <div class="uk-height-large uk-background-cover uk-light uk-flex" uk-parallax="bgy: -100" style="background-image: url('/img/cart/_empty2.jpg');">#}
 {#      <h1 class="uk-width-1-2@m uk-text-center uk-margin-auto uk-margin-auto-vertical">{{ title }}</h1>#}
 {#    </div>#}
-    <img src="{% static '/img/cart/empty2.jpg' %}" alt="img">
+    <img src="{% static_webp '/img/cart/empty2.jpg' %}" alt="img">
   {% endif %}
   <!--========== END PARALLAX ==========-->
 
@@ -49,7 +49,7 @@
                           </td>
                           <td class="uk-table-link" width="100px">
                             <a href="{% url 'shop:product' product.id %}">
-                              <img width="80px" src="{{ product.imgs.all.0 }}" alt="{{ product.title }}">
+                              <img width="80px" src="{% static_webp '..'|add:product.imgs.all.0.image.url %}" alt="{{ product.title }}">
                             </a>
                             <input type="hidden" class="product-id" name="pid-{{ product.id }}" value="{{ product.id }}">
                           </td>

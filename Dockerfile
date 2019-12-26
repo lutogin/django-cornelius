@@ -11,9 +11,9 @@ COPY ./requirements.txt /requirements.txt
 # Копируем с рабочей директории файл с зависимостями в контейнер
 
 RUN apk add --update --no-cache postgresql-client \
-        jpeg-dev
+        jpeg-dev libwebp-dev
         # jpeg-dev для загрузки файлов
-RUN apk add --update --no-cache --virtual .tmp-build-deps gcc libc-dev linux-headers postgresql-dev \
+RUN apk add --update --no-cache --virtual .tmp-build-deps gcc libc-dev linux-headers postgresql-dev python3-dev \
         # Для postgresql
         musl-dev zlib-dev
         # загрузки файлов на сервер

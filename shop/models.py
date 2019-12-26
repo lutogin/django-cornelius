@@ -1,7 +1,8 @@
+import PIL
 from django.db import models
 from django.urls import reverse
-
 from PIL import Image
+from django_resized import ResizedImageField
 
 import uuid
 import os
@@ -59,17 +60,20 @@ class Category(models.Model):
 
 class Photo(models.Model):
     """Модель для фото продукта."""
-    image = models.ImageField(null=True, upload_to=product_image_file_path, verbose_name='Фото товара')
+    image = ResizedImageField(null=True, upload_to=product_image_file_path, verbose_name='Фото товара', crop=['middle', 'center'])
 
-    def save(self):
-        super().save()  # saving image first
-
-        img = Image.open(self.image.path)  # Open image using self
-
-        if img.height > 3840 or img.width > 2160:
-            new_img = (2560, 1440)
-            img.thumbnail(new_img)
-            img.save(self.image.path)  # saving image at the same path
+    # def save(self):
+    #     super().save()
+    #
+    #     img = Image.open(self.image.path)
+    #
+    #     # if img.height > 1920 or img.width > 1080:
+    #     base_width = img.width
+    #     ratio = (base_width / float(img.size[0]))
+    #     height = int((float(img.size[1]) * float(ratio)))
+    #
+    #     img.resize((base_width, height), PIL.Image.ANTIALIAS)
+    #     super(Photo, self).save()
 
     # Вывод картинок в админке!
     def admin_image(self):
@@ -136,7 +140,7 @@ class Engraving(models.Model):
     title = models.CharField(max_length=255, verbose_name='Титл гравировки', blank=True)
     price = models.IntegerField(verbose_name='Цена')
     available = models.BooleanField(verbose_name='Наличие товара', default=True)
-    imgs = models.OneToOneField(Photo, verbose_name='Фото товара', on_delete=models.CASCADE)
+    img = models.OneToOneField(Photo, verbose_name='Фото товара', on_delete=models.CASCADE)
     created_date = models.DateTimeField(auto_now_add=True, blank=True)
 
     class Meta:
@@ -145,7 +149,7 @@ class Engraving(models.Model):
         verbose_name_plural = 'Гравировки'
 
     def __str__(self):
-        return f'{self.title} - {self.imgs}'
+        return f'{self.title} - {self.img}'
 
 
 class MainSlider(models.Model):
@@ -153,6 +157,18 @@ class MainSlider(models.Model):
     title = models.CharField(max_length=255, verbose_name='Заголовок слайда')
     description = models.CharField(max_length=255, verbose_name='Описание слайда')
     img = models.ImageField(null=True, upload_to=slider_image_file_path, verbose_name='Слайд')
+
+    # def save(self):
+    #     super().save()
+    #     img = Image.open(self.img.path)
+    #     file, ext = os.path.splitext(self.img.path)
+    #
+    #     if img.height > 2560 or img.width > 1440:
+    #         img.resize((1920, 1080))
+    #         img.save(self.img.path)
+    #
+    #     img.convert("RGB")
+    #     img.save(f'{file}.webp', "WEBP")
 
     class Meta:
         verbose_name = 'Слайд'
