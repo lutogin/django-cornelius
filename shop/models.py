@@ -1,7 +1,7 @@
-import PIL
+# import PIL
 from django.db import models
 from django.urls import reverse
-from PIL import Image
+# from PIL import Image
 from django_resized import ResizedImageField
 
 import uuid
