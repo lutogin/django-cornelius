@@ -4,6 +4,10 @@ from django.urls import reverse
 # from PIL import Image
 from django_resized import ResizedImageField
 
+from django.db.models.signals import pre_delete
+from django.dispatch.dispatcher import receiver
+
+
 import uuid
 import os
 
@@ -214,3 +218,9 @@ class OurWorks(models.Model):
 
     def __str__(self):
         return self.product.title
+
+
+@receiver(pre_delete, sender=Photo)
+def image_model_delete(sender, instance, **kwargs):
+    if instance.image.name:
+        instance.image.delete(False)
