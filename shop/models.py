@@ -104,6 +104,8 @@ class Product(models.Model):
         ('brown', 'Коричневый(стандартный)'),
         ('red', 'Красный'),
         ('blue', 'Синий'),
+        ('black', 'Черный'),
+        ('multicolor', 'Цветной'),
     )  # Структура для передачи в choices
 
     SLUG_CHOISE = (
