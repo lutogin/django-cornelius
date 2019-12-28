@@ -4,7 +4,7 @@ from shop.models import *
 
 @admin.register(Product)
 class ProductAdmin(admin.ModelAdmin):
-    list_display = ['title', 'price', 'available', 'created_date']
+    list_display = ['id', 'title', 'price', 'is_top_sale', 'created_date']
     list_filter = ['created_date']
 
 

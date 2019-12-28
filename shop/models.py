@@ -133,7 +133,7 @@ class Product(models.Model):
         return reverse('shop:ProductDetail', args=[self.id, self.slug])
 
     class Meta:
-        ordering = ['title', '-created_date']
+        ordering = ['-created_date']
         verbose_name = 'Продукт'
         verbose_name_plural = 'Продукты'
 
