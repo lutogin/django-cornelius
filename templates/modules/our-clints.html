@@ -1,11 +1,11 @@
-{% load webp_converter %}
+{#{% load webp_converter %}#}
   <div class="content-lg container">
     <div class="swiper-slider swiper-clients">
       <div class="swiper-wrapper">
         {% for client in clients %}
           <div class="swiper-slide">
             <a href="{{ client.link }}" target="_blank">
-              <img class="swiper-clients-img" src="{% static_webp '..'|add:client.img.url %}" alt="{{ client.name }}">
+              <img class="swiper-clients-img" src="{{ client.img.url }}" alt="{{ client.name }}">
             </a>
           </div>
         {% endfor %}

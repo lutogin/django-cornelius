@@ -1,4 +1,4 @@
-{% load webp_converter %}
+{#{% load webp_converter %}#}
 <div class="bg-color-sky-light overflow-h">
   <div class="content-lg container">
     <div class="row margin-b-40">
@@ -15,7 +15,7 @@
           <!-- Work -->
           <div class="work wow fadeInUp" data-wow-duration=".3" data-wow-delay=".1s">
             <div class="work-overlay">
-              <img class="full-width img-responsive" src="{% static_webp '..'|add:work.img.url %}" alt="Portfolio Image">
+              <img class="full-width img-responsive" src="{{ work.img.url }}" alt="Portfolio Image">
             </div>
             <div class="work-content">
               <h3 class="color-white margin-b-5">{{ work.product.title }}</h3>

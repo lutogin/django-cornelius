@@ -1,6 +1,6 @@
 {% extends 'base.html' %}
 {% load static %}
-{% load webp_converter %}
+{#{% load webp_converter %}#}
 
 {% block title_content %}
   {{ title }}
@@ -31,8 +31,8 @@
         <div class="col-sm-4 sm-margin-b-50">
           <div class="margin-b-20">
             <div class="wow zoomIn" data-wow-duration=".3" data-wow-delay=".1s">
-              <a class="uk-button" href="{% static_webp '..'|add:engraving.img.image.url %}">
-                <img class="img-responsive uk-card-hover" src="{% static_webp '..'|add:engraving.img.image.url %}" alt="Img">
+              <a class="uk-button" href="{{ engraving.img.image.url }}">
+                <img class="img-responsive uk-card-hover" src="{{ engraving.img.image.url }}" alt="Img">
               </a>
             </div>
           </div>
