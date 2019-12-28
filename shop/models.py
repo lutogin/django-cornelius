@@ -156,7 +156,8 @@ class MainSlider(models.Model):
     """Модель слайдера."""
     title = models.CharField(max_length=255, verbose_name='Заголовок слайда')
     description = models.CharField(max_length=255, verbose_name='Описание слайда')
-    img = models.ImageField(null=True, upload_to=slider_image_file_path, verbose_name='Слайд')
+    # img = models.ImageField(null=True, upload_to=slider_image_file_path, verbose_name='Слайд')
+    img = ResizedImageField(size=[1920, 1080], quality=75, upload_to=slider_image_file_path, verbose_name='Слайд', crop=['middle', 'center'])
 
     # def save(self):
     #     super().save()
