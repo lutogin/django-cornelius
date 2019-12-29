@@ -1,6 +1,7 @@
 {% extends 'base.html' %}
 {% load static %}
 {#{% load webp_converter %}#}
+{% load thumbnail %}
 {% block body %}
   <!--========== PARALLAX ==========-->
   <div class="uk-height-medium uk-background-cover uk-light uk-flex" uk-parallax="bgy: -300" style='background-image: url({% static "/img/1920x1080/01.jpg" %});'>
@@ -23,8 +24,20 @@
           <a href="{% url 'shop:product' product.id %}">
             <div class="margin-b-20 ">
               <div class="wow zoomIn uk-inline-clip uk-transition-toggle" data-wow-duration=".3" data-wow-delay=".1s">
-                <img class="img-responsive" src="{% static '..'|add:product.imgs.all.0.image.url %}" alt="Product Image">
-                <img class="uk-transition-scale-up uk-position-cover" src="{% static '..'|add:product.imgs.all.1.image.url %}" alt="Product Image">
+                {% thumbnail product.imgs.all.0.image "300x185" crop="center" as im %}
+                  <img class="img-responsive"
+                       src="{{ im.url }}"
+                       width="{{ im.width }}"
+                       height="{{ im.height }}"
+                       alt="Product Image">
+                {% endthumbnail %}
+                {% thumbnail product.imgs.all.1.image "300x185" crop="center" as im %}
+                  <img class="uk-transition-scale-up uk-position-cover"
+                       src="{{ im.url }}"
+                       width="{{ im.width }}"
+                       height="{{ im.height }}"
+                       alt="Product Image">
+                {% endthumbnail %}
               </div>
             </div>
           </a>

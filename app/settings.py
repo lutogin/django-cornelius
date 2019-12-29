@@ -21,7 +21,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'webp_converter',
+    'sorl.thumbnail',
+    # 'webp_converter',
     'captcha',
     'core',
     'shop',
@@ -60,7 +61,7 @@ TEMPLATES = [
                 'cart.context_processors.cart',
                 'core.context_processors.config',
                 'django.template.context_processors.media',
-                'webp_converter.context_processors.webp_support',
+                # 'webp_converter.context_processors.webp_support',
             ],
         },
     },
@@ -144,7 +145,7 @@ CART_SESSION_ID = 'cart'
 PYTHONHTTPSVERIFY = 0
 
 DJANGORESIZED_DEFAULT_SIZE = [1600, 960]
-DJANGORESIZED_DEFAULT_QUALITY = 70
+DJANGORESIZED_DEFAULT_QUALITY = 72
 DJANGORESIZED_DEFAULT_KEEP_META = True
 DJANGORESIZED_DEFAULT_FORCE_FORMAT = 'JPEG'
 DJANGORESIZED_DEFAULT_FORMAT_EXTENSIONS = {'JPEG': ".jpg"}

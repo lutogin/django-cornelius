@@ -1,6 +1,7 @@
 {% extends 'base.html' %}
 {% load static %}
 {#{% load webp_converter %}#}
+{% load thumbnail %}
 
 {% block title_content %}
   {{ title }}
@@ -39,7 +40,12 @@
           <div class="margin-b-20">
             <div class="wow zoomIn" data-wow-duration=".3" data-wow-delay=".1s">
               <a class="uk-button" href="{{ img.image.url }}">
-                <img class="img-responsive uk-card-hover" src="{{ img.image.url }}" alt="Img"></a>
+                {% thumbnail img.image "300x185" crop="center" as im %}
+                  <img class="img-responsive uk-card-hover" src="{{ im.url }}"
+                       width="{{ im.width }}"
+                       height="{{ im.height }}"
+                       alt="Img"></a>
+                {% endthumbnail %}
             </div>
           </div>
         </div>
