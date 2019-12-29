@@ -44,13 +44,12 @@
                   <img class="img-responsive uk-card-hover" src="{{ im.url }}"
                        width="{{ im.width }}"
                        height="{{ im.height }}"
-                       alt="Img"></a>
+                       alt="{{ product.description }}"></a>
                 {% endthumbnail %}
             </div>
           </div>
         </div>
       {% endfor %}
-      <p>{{ product.text }}</p>
     </div>
   </div>
   <!--========== END Контент продукта ==========-->

@@ -29,20 +29,20 @@
                        src="{{ im.url }}"
                        width="{{ im.width }}"
                        height="{{ im.height }}"
-                       alt="Product Image">
+                       alt="{{ product.description }}">
                 {% endthumbnail %}
                 {% thumbnail product.imgs.all.1.image "300x185" crop="center" as im %}
                   <img class="uk-transition-scale-up uk-position-cover"
                        src="{{ im.url }}"
                        width="{{ im.width }}"
                        height="{{ im.height }}"
-                       alt="Product Image">
+                       alt="{{ product.description }}">
                 {% endthumbnail %}
               </div>
             </div>
           </a>
-          <h3>{{ product.type_title }}</h3>
-          <p>{{ product.description }}</p>
+{#          <h3>{{ product.type_title }}</h3>#}
+          <p>{{ product.title }}</p>
           {#                    <a class="link" href="/product/?id={{ product.id }}">Подробнее</a>#}
         </div>
       {% endfor %}
