@@ -29,15 +29,16 @@
           <a href="{% url 'shop:product' product.id %}">
             <div class="margin-b-20 ">
               <div class="wow zoomIn uk-inline-clip uk-transition-toggle" data-wow-duration=".3" data-wow-delay=".1s">
-                {% thumbnail product.imgs.all.0.image "300x185" crop="center" as im %}
+                {% with imgs=product.imgs.all %}
+                {% thumbnail imgs.0.image "300x185" crop="center" as im %}
                   <img class="img-responsive"
                        src="{{ im.url }}"
                        width="{{ im.width }}"
                        height="{{ im.height }}"
                        alt="{{ product.description }}">
                 {% endthumbnail %}
-                {% if product.imgs.all.1.image %}
-                  {% thumbnail product.imgs.all.1.image "300x185" crop="center" as im %}
+                {% if imgs.1.image %}
+                  {% thumbnail imgs.1.image "300x185" crop="center" as im %}
                     <img class="uk-transition-scale-up uk-position-cover"
                          src="{{ im.url }}"
                          width="{{ im.width }}"
@@ -45,6 +46,7 @@
                          alt="{{ product.description }}">
                   {% endthumbnail %}
               {% endif %}
+              {% endwith %}
               </div>
             </div>
           </a>
