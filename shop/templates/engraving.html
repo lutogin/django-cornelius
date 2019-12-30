@@ -3,9 +3,7 @@
 {#{% load webp_converter %}#}
 {% load thumbnail %}
 
-{% block title_content %}
-  {{ title }}
-{% endblock %}
+{% block title_content %}{{ title }}{% endblock %}
 
 {% block additional_js %}
   <script type="text/javascript" src="{% static '/js/pages/product.js' %}"></script>
@@ -43,7 +41,7 @@
               </a>
             </div>
           </div>
-          <p class="text-center">Цена ~ {{ engraving.price }} р.</p>
+{#          <p class="text-center">Цена ~ {{ engraving.price }} р.</p>#}
         </div>
       {% endfor %}
     </div>
