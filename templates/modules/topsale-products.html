@@ -31,13 +31,15 @@
                      height="{{ im.height }}"
                      alt="Topsale Products Image">
               {% endthumbnail %}
-              {% thumbnail product.imgs.all.1.image "300x185" crop="center" as im %}
-                <img class="uk-transition-scale-up uk-position-cover"
-                     src="{{ im.url }}"
-                     width="{{ im.width }}"
-                     height="{{ im.height }}"
-                     alt="Topsale Products Image">
-              {% endthumbnail %}
+              {% if product.imgs.all.1.image %}
+                {% thumbnail product.imgs.all.1.image "300x185" crop="center" as im %}
+                  <img class="uk-transition-scale-up uk-position-cover"
+                       src="{{ im.url }}"
+                       width="{{ im.width }}"
+                       height="{{ im.height }}"
+                       alt="Topsale Products Image">
+                {% endthumbnail %}
+              {% endif %}
             </div>
           </div>
         </a>
