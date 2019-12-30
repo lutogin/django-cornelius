@@ -4,15 +4,15 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 SECRET_KEY = 'cin2c^lk79t6p$msc^f(lp1o2lp@9n4u!5odr(_h2hor*dqnrc'
 
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = [
     '127.0.0.1',
     '167.172.182.37'
 ]
 SCHEMA = 'https'
-M_HOST = '167.172.182.37:8000'
-MAIN_HOST = 'https://167.172.182.37:8000'
+M_HOST = 'cornelius-dom.art'
+MAIN_HOST = 'https://cornelius-dom.art'
 
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -82,6 +82,7 @@ DATABASES = {
 
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_USE_TLS = True
+EMAIL_USE_SSL = False
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 587
 EMAIL_HOST_USER = 'hekto.v8@gmail.com'
