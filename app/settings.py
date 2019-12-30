@@ -4,15 +4,15 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 SECRET_KEY = 'cin2c^lk79t6p$msc^f(lp1o2lp@9n4u!5odr(_h2hor*dqnrc'
 
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = [
     '127.0.0.1',
     '167.172.182.37'
 ]
 SCHEMA = 'https'
-M_HOST = '167.172.182.37:8001'
-MAIN_HOST = 'http://167.172.182.37:8001'
+M_HOST = '167.172.182.37:8000'
+MAIN_HOST = 'https://167.172.182.37:8000'
 
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -86,7 +86,6 @@ EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 587
 EMAIL_HOST_USER = 'hekto.v8@gmail.com'
 EMAIL_HOST_PASSWORD = 'Qz314159'
-
 EMAIL_CORNELIUS = 'handmadecornelius@gmail.com'
 EMAIL_ADMIN = 'lutogin+cornelius@gmail.com'
 
