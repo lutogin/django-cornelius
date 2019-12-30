@@ -35,7 +35,15 @@
                        height="{{ im.height }}"
                        alt="{{ product.description }}">
                 {% endthumbnail %}
-                {% if imgs.1.image %}
+                {% if imgs.0.image.url == imgs.1.image.url and imgs.2.image.url %}
+                  {% thumbnail imgs.2.image "300x185" crop="center" as im3 %}
+                    <img class="uk-transition-scale-up uk-position-cover"
+                         src="{{ im3.url }}"
+                         width="{{ im3.width }}"
+                         height="{{ im3.height }}"
+                         alt="{{ product.description }}">
+                  {% endthumbnail %}
+                {% else %}
                   {% thumbnail imgs.1.image "300x185" crop="center" as im2 %}
                     <img class="uk-transition-scale-up uk-position-cover"
                          src="{{ im2.url }}"
