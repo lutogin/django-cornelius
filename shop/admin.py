@@ -40,6 +40,6 @@ class ReviewAdmin(admin.ModelAdmin):
 
 @admin.register(Engraving)
 class EngravingAdmin(admin.ModelAdmin):
-    list_display = ['title']
+    list_display = ['img']
 
 

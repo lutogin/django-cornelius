@@ -65,6 +65,7 @@ class Category(models.Model):
 class Photo(models.Model):
     """Модель для фото продукта."""
     image = ResizedImageField(null=True, upload_to=product_image_file_path, verbose_name='Фото товара', crop=['middle', 'center'])
+    created_date = models.DateTimeField(auto_now_add=True, blank=True)
 
     # def save(self):
     #     super().save()
@@ -143,19 +144,19 @@ class Product(models.Model):
 
 class Engraving(models.Model):
     """Модель гравровки."""
-    title = models.CharField(max_length=255, verbose_name='Титл гравировки', blank=True)
-    price = models.IntegerField(verbose_name='Цена')
-    available = models.BooleanField(verbose_name='Наличие товара', default=True)
+    # title = models.CharField(max_length=255, verbose_name='Титл гравировки', blank=True)
+    # price = models.IntegerField(verbose_name='Цена')
+    # available = models.BooleanField(verbose_name='Наличие товара', default=True)
     img = models.OneToOneField(Photo, verbose_name='Фото товара', on_delete=models.CASCADE)
     created_date = models.DateTimeField(auto_now_add=True, blank=True)
 
     class Meta:
-        ordering = ['title']
+        ordering = ['-created_date']
         verbose_name = 'Гравировка'
         verbose_name_plural = 'Гравировки'
 
     def __str__(self):
-        return f'{self.title} - {self.img}'
+        return f'{self.img}'
 
 
 class MainSlider(models.Model):
