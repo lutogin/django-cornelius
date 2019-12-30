@@ -32,7 +32,7 @@
                      height="{{ im.height }}"
                      alt="Topsale Products Image">
               {% endthumbnail %}
-              {% if imgs.1.image %}
+{#              {% if imgs.1.image %}#}
                 {% thumbnail imgs.1.image "300x185" crop="center" as im2 %}
                   <img class="uk-transition-scale-up uk-position-cover"
                        src="{{ im2.url }}"
@@ -40,7 +40,7 @@
                        height="{{ im2.height }}"
                        alt="Topsale Products Image">
               {% endthumbnail %}
-              {% endif %}
+{#              {% endif %}#}
               {% endwith %}
             </div>
           </div>
