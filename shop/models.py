@@ -211,7 +211,7 @@ class OurClients(models.Model):
 class OurWorks(models.Model):
     """Модель наших работ"""
     product = models.ForeignKey(Product, on_delete=models.CASCADE, verbose_name='Реальный прототиа товра')
-    img = models.ImageField(upload_to=works_image_file_path, verbose_name='Фото работы')
+    img = ResizedImageField(null=True, upload_to=works_image_file_path, verbose_name='Фото товара', crop=['middle', 'center'])
     large_img = models.BooleanField(verbose_name='Большая плитка', default=False)
 
     class Meta:
