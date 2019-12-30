@@ -42,7 +42,7 @@ class CartService:
 
         text_content = ''
         for pid, val in cart.cart.items():
-            text_content += 'Товар: <a href="'+settings.MAIN_HOST + reverse("shop:product", args=pid)+'">Продукт</a> | '
+            text_content += 'Товар: <a href="'+settings.MAIN_HOST + reverse("shop:product", args=[int(pid)])+'">Продукт</a> | '
             text_content += f'Количество: {val["quantity"]} | Цена за еденицу: {val["price"]} \n'
         text_content += f'Покупатель {customer.contact_name} | Способ связи: {config["contactTypeList"][customer.contact_type]}: {customer.contact_data} \n'
         text_content += f'Заказ: <a href="{settings.MAIN_HOST}/order/{order.id}">{order.id}</a>'
