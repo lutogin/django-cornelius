@@ -32,7 +32,7 @@
                 {% with imgs=product.imgs.all %}
                 {% thumbnail imgs.0.image "300x185" crop="center" as im %}
                   <img class="img-responsive"
-                       src="{{ imgs.0.image }}"
+                       src="{{ product.imgs.all.0.image.url }}"
                        width="{{ im.width }}"
                        height="{{ im.height }}"
                        alt="{{ product.description }}">
@@ -40,7 +40,7 @@
 {#                {% if imgs.1.image %}#}
                   {% thumbnail imgs.1.image "300x185" crop="center" as im2 %}
                     <img class="uk-transition-scale-up uk-position-cover"
-                         src="{{ imgs.1.image }}"
+                         src="{{product.imgs.all.1.image.url }}"
                          width="{{ im2.width }}"
                          height="{{ im2.height }}"
                          alt="{{ product.description }}">
